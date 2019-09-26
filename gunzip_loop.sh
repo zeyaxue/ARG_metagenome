@@ -8,6 +8,7 @@ unzipped_files_output=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/un
 for file in $starting_files_location/*fastq.gz
 
 do 
-	gunzip -c $file > $unzipped_files_output/
+	STEM=$(basename "${file}" .gz)
+  	gunzip -c "${file}" > /$unzipped_files_output/"${STEM}"
 
 done
