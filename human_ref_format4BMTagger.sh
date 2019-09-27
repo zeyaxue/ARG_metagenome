@@ -16,7 +16,9 @@ cksum_output=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13/
 
 for file in $db_path/*.gz; do
 	md5sum $file >> $cksum_output/computed_check_sums.txt
-	sed -i "s|$path|./|g" $cksum_output/computed_check_sums.txt
+	sed -i "s|$path|./|g" "$cksum_output/computed_check_sums.txt"
 done
 
 diff $cksum_output/computed_check_sums.txt /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/GCF_000001405.39_GRCh38.p13/md5checksums.txt >> /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/diff.txt
+# move to my github account so I can see it more easily
+cp /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/diff.txt /share/lemaylab-backedup/Zeya/scripts/gitSRC/ARG_metagenome/diff.txt
