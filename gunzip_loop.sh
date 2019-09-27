@@ -5,10 +5,18 @@ starting_files_location=/share/lemaylab-backedup/Zeya/raw_data/NovaSeq043/tb957t
 
 unzipped_files_output=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/unzipped
 
+
 for file in $starting_files_location/*fastq.gz
-
-do 
+do
 	STEM=$(basename "${file}" .gz)
-  	gunzip -c "${file}" > /$unzipped_files_output/"${STEM}"
 
+	if [-e /$unzipped_files_output/"${STEM}".fastq]
+	then 
+		echo this file already exist and will not to rewrite
+	else
+		#gunzip -c "${file}" > /$unzipped_files_output/"${STEM}"
+		echo it does not exist
+  	fi		
 done
+
+
