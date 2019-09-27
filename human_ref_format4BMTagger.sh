@@ -29,8 +29,8 @@ cksum_output=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13/computed
 
 ############################################################
 # 2. format reference
-bmtool_location=/share/milklab/programs/bmtools/bmtagger/bmtool
-srprism_location=/share/milklab/programs/srprism/gnuac/app/srprism
+bmtool_location=/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger/bmtool 
+srprism_location=/share/lemaylab-backedup/milklab/programs/srprism/gnuac/app/srprism 
 
 # unzip the zipped ref genome
 gunzip -c /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/GCF_000001405.39_GRCh38.p13/GCF_000001405.39_GRCh38.p13_genomic.fna.gz > /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/GCF_000001405.39_GRCh38.p13_genomic.fna
