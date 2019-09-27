@@ -10,12 +10,13 @@ for file in $starting_files_location/*fastq.gz
 do
 	STEM=$(basename "${file}" .gz)
 
-	if [-e /$unzipped_files_output/"${STEM}".fastq]
+	if [ -f /$unzipped_files_output/"${STEM}" ]
 	then 
+		echo /$unzipped_files_output/"${STEM}".fastq
 		echo this file already exist and will not to rewrite
 	else
-		#gunzip -c "${file}" > /$unzipped_files_output/"${STEM}"
-		echo it does not exist
+		gunzip -c "${file}" > /$unzipped_files_output/"${STEM}"
+		echo it does not exist. Being written now....
   	fi		
 done
 
