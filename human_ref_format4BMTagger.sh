@@ -16,7 +16,7 @@ cksum_output=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13/computed
 
 for file in $db_path/*.gz; do
 	md5sum $file >> $cksum_output
-	sed -i "s|$db_path|./|g" $cksum_output
+	sed -i "s|$db_path/|./|g" "$cksum_output"
 done
 
 diff $cksum_output /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/GCF_000001405.39_GRCh38.p13/md5checksums.txt >> /share/lemaylab-backedup/milklab/database/human_GRCh38_p13/diff.txt
