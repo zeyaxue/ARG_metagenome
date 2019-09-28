@@ -4,14 +4,17 @@
 #
 # VARIABLES - set these paths for each step.
 #
-#       0. Starting files location
-starting_files_location=/share/lemaylab-backedup/Zeya/raw_data/test_dataset
+#       0. Starting and output files location
+starting_files_location=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/unzipped
+
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output/
+output_files_location=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output
 
 #       1. Human Read Removal
 bmtagger_location=/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger
 # bbmap_location=/path/to/Programs/BBMap/sh 
 # 9/25/19 I can't find BBMap...Will dig for it later
-human_db=/share/lemaylab-backedup/milklab/michelle/databases/human_db
+human_db=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13
 
 #       2. PEAR
 #pear_location=/path/to/Programs/pear-0.9.6/pear-0.9.6
@@ -41,21 +44,18 @@ module load blast
 module load java bbmap
 echo "NOW STARTING HUMAN READ REMOVAL STEP AT: "; date
 
-for file in $starting_files_location/5052_S15_L003_R1_001.fastq
+for file in $starting_files_location/*R1_001.fastq
 
 do
         file1=$file
         file2=$(echo $file1 | sed 's/R1_001/R2_001/')
 		filename=$(basename "$file1")
         basename=$(echo $filename | cut -f 1 -d "_")
-		outname="$starting_files_location/$basename"
+		outname="$output_files_location/$basename"
 
-        $bmtagger_location/bmtagger.sh -b $human_db/GCA_000001405.26_GRCh38.p11_genomic.bitmask -x $human_db/GCA_000001405.26_GRCh38.p11_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
+        $bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
         filterbyname.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
 done
-
-mkdir $starting_files_location/step_1_BMTagger_output/
-mv $starting_files_location/SRR5128401*human* $starting_files_location/step_1_BMTagger_output/
 
 echo "STEP 1 DONE AT: "; date
 
