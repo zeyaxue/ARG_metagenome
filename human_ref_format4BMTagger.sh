@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --mem-per-cpu 2000
-#SBATCH --mail-user=mltreiber@ucdavis.edu
+#SBATCH --mail-user=zhxue@ucdavis.edu
 #SBATCH --mail-type=END
 
 #### Created by Zeya Xue on 09.27.2019
