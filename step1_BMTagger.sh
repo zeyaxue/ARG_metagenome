@@ -1,9 +1,15 @@
+#!/bin/bash
 ## Based on script from https://github.com/mltreiber/functional_metagenomics/blob/master/scripts/master_beta.galac.db_analysis_stoolmg.sh
 
-# To have the process run in the background even if ssh connection is interupted, I used the GNU screen 
-# To start a new window: 
+# To have the process run in the background even if ssh connection is interupted, I used the GNU screen software
+# To start a new window: type screen before running this script
+# # detach a screen session: Press "Ctrl"+"a" followed by "d"
 
-# Alternatively SBATCH COMMAND CAN BE used to manage running the work
+#SBATCH --mail-user=zhxue@ucdavis.edu
+#SBATCH --mail-type=ALL
+#SBATCH --job-name=BMTagger
+#SBATCH --cpus-per-task 4
+
 
 ##########################################################################
 #
@@ -12,7 +18,7 @@
 #       0. Starting and output files location
 starting_files_location=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/unzipped
 
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output/
+#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output/ # only need to run once when set up
 output_files_location=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output
 
 #       1. Human Read Removal
@@ -50,21 +56,26 @@ module load java bbmap
 echo "NOW STARTING HUMAN READ REMOVAL STEP AT: "; date
 
 for file in $starting_files_location/*R1_001.fastq
-
 do
         file1=$file
         file2=$(echo $file1 | sed 's/R1_001/R2_001/')
-		filename=$(basename "$file1")
+	filename=$(basename "$file1")
         basename=$(echo $filename | cut -f 1 -d "_")
-		outname="$output_files_location/$basename"
+	outname="$output_files_location/$basename"
 
-        $bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
+        if [ -f $outname.human.txt ]
+        then 
+                echo $outname.human.txt already exist and will not be overwritten.
+        else
+                echo $outname.human.txt does not exist. Running BMTagger now...
+                $bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
 
-        # filterbyname.sh is included in the bbmap module
-        # Here I used the local copiy of the filterbyname.sh to as a stable copy 
-        # This script removes sequences in both R1 and R2 that matches the human reads 
-        # (sequence header is passed to the script in the outname.human.txt file)
-        /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
+                # filterbyname.sh is included in the bbmap module
+                # Here I used the local copiy of the filterbyname.sh to as a stable copy 
+                # This script removes sequences in both R1 and R2 that matches the human reads 
+                # (sequence header is passed to the script in the outname.human.txt file)
+                /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
+        fi
 done
 
 echo "STEP 1 DONE AT: "; date
