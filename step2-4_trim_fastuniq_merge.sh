@@ -30,8 +30,5 @@ do
 	file2=${STEM}2_nohuman_1000reads.fastq
 	echo $file2
 
-	#java -jar $trimmomatic_location PE $file1 $file2 $STEM
-	#-phred33 $file $shortname SLIDINGWINDOW:4:15 MINLEN:99
-
-
+	java -jar $trimmomatic_location PE $file1 $file2 ${STEM}_R1_1000reads_paired.fastq ${STEM}_R1_1000reads_unpaired.fastq.gz ${STEM}_R2_1000reads_paired.fastq ${STEM}_R2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
 done
