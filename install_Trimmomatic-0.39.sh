@@ -1,8 +1,12 @@
 #!/bin/bash
 
+# Miniconda 3 is installed into this location: /home/xzyao/miniconda3
+# Add this path to the environmentals variable $PATH so conda command can be called
+# Note: this is only changing the PATH temporarily. 
+# For permant change, one can add the command to .bash_profile (but I won't do in this case to not mess with other scripts)
+export PATH="/home/xzyao/miniconda3/bin:$PATH"
 
-# I got this link by going to the website, and right click to copy link address
-cd /share/lemaylab-backedup/milklab/programs
-wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-Src-0.39.zip
-unzip Trimmomatic-Src-0.39.zip
-rm Trimmomatic-Src-0.39.zip
+# install trimmomatic version 0.39-1
+conda install trimmomatic
+# install trimmomatic dependency 
+conda install openjdk
