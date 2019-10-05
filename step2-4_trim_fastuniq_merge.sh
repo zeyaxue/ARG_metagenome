@@ -19,7 +19,7 @@ echo "NOW STARTING READ CLEANING WITH TRIMMOMATIC AT: "; date
 module load java trimmomatic
 
 input_dir=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/
+#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/
 output_dir=/share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/
 
 for file in $input_dir/*R1_nohuman_1000* 
@@ -27,10 +27,11 @@ do
 	STEM=$(basename "${file}" 1_nohuman_1000reads.fastq)
 
 	file1=$file
-	file2=$STEM2_nohuman_1000reads.fastq
+	file2=${STEM}2_nohuman_1000reads.fastq
 	echo $file2
 
 	#java -jar $trimmomatic_location PE $file1 $file2 $STEM
 	#-phred33 $file $shortname SLIDINGWINDOW:4:15 MINLEN:99
 
 
+done
