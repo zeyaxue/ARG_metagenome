@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task 7
 
 #       3. Trimmomatic
-trimmomatic_location=/home/xzyao/miniconda3/pkgs/trimmomatic-0.39-1/bin
+trimmomatic_location=/home/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic-0.39-1/trimmomatic.jar
 
 ###################################################################
 #
