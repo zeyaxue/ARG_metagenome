@@ -22,3 +22,4 @@ conda config --add channels conda-forge # Only needed for first-time setup
 # install FastUniq package
 conda install fastuniq
 # The version I got is fastuniq-1.1-h470a237_1
+# Location: /home/xzyao/miniconda3/pkgs/fastuniq-1.1-h470a237_1/
