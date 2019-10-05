@@ -71,10 +71,10 @@ do
                 #$bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
 
                 # filterbyname.sh is included in the bbmap module
-                # Here I used the local copiy of the filterbyname.sh to as a stable copy 
+                # The file path is /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh
                 # This script removes sequences in both R1 and R2 that matches the human reads 
                 # (sequence header is passed to the script in the outname.human.txt file)
-                source /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
+                filterbyname.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
         fi
 done
 
