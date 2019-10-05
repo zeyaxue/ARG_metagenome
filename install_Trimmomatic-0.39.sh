@@ -7,6 +7,7 @@
 export PATH="/home/xzyao/miniconda3/bin:$PATH"
 
 # install trimmomatic version 0.39-1
-conda install trimmomatic
+conda install trimmomatic # from bioconda channel
+# Location is /home/xzyao/miniconda3/pkgs/trimmomatic-0.39-1
 # install trimmomatic dependency 
-conda install openjdk
+conda install openjdk # from conda-forge
