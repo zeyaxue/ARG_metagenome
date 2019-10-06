@@ -22,7 +22,7 @@ module load java trimmomatic
 
 input_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset
 #mkdir /share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/ # only need to run once 
-output_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/
+output_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step2_trim/
 
 for file in $input_dir_trim/*R1_nohuman_1000* 
 do
