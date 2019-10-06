@@ -58,7 +58,12 @@ do
 
 	echo $file1 >> $fastuniq_input_list
 	echo $file2 >> $fastuniq_input_list
-done
 
-# Run FastUniq
-$fastuniq_location -i $fastuniq_input_list -t q -o $output_dir_dup/1.fastq -p $output_dir_dup/2.fastq
+	# Althoug FastUniq takes list as input !!!!DO NOT SUPPLY ALL FILES IN ONE LIST!!!!
+	# Because FastUniq can only write out 2 files for forward and reverse
+	# Run FastUniq
+	$fastuniq_location -i $fastuniq_input_list -t q -o $output_dir_dup/${STEM}1_100reads_dup.fastq -p $output_dir_dup/${STEM}2_100reads_dup.fastq
+
+	# clear the content of the list file so that FastUniq takes only 2 files every time it runs
+	> $fastuniq_input_list
+done
