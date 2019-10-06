@@ -5,8 +5,10 @@
 #SBATCH --job-name=trim_Fastuniq_merge
 #SBATCH --cpus-per-task 7
 
-#       3. Trimmomatic
+# Trimmomatic
 trimmomatic_location=/home/xzyao/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic-0.39-1/trimmomatic.jar
+# FastUniq 
+fastuniq_location=/home/xzyao/miniconda3/pkgs/fastuniq-1.1-h470a237_1/bin/fastuniq
 
 ###################################################################
 #
@@ -18,16 +20,45 @@ echo "NOW STARTING READ CLEANING WITH TRIMMOMATIC AT: "; date
 
 module load java trimmomatic
 
-input_dir=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset
+input_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset
 #mkdir /share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/ # only need to run once 
-output_dir=/share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/
+output_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/
 
-for file in $input_dir/*R1_nohuman_1000* 
+for file in $input_dir_trim/*R1_nohuman_1000* 
 do
 	STEM=$(basename "${file}" 1_nohuman_1000reads.fastq)
 
 	file1=$file
 	file2=$input_dir/${STEM}2_nohuman_1000reads.fastq
 
-	java -jar $trimmomatic_location PE $file1 $file2 $output_dir/${STEM}1_1000reads_paired.fastq $output_dir/${STEM}1_1000reads_unpaired.fastq.gz $output_dir/${STEM}2_1000reads_paired.fastq $output_dir/${STEM}2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
+	java -jar $trimmomatic_location PE $file1 $file2 $output_dir_trim/${STEM}1_1000reads_paired.fastq $output_dir/${STEM}1_1000reads_unpaired.fastq.gz $output_dir/${STEM}2_1000reads_paired.fastq $output_dir/${STEM}2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
 done
+
+
+
+###################################################################
+#
+# STEP 3: Remove duplicated reads
+# For FastUniq options: https://wiki.gacrc.uga.edu/wiki/FastUniq
+
+echo "NOW STARTING REMOVING DUPLICATE READS AT: "; date 
+
+#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step3_fastuniq
+output_dir_dup=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step3_fastuniq
+
+touch $output_dir_dup/fastuniq_input_list.txt
+$fastuniq_input_list=$output_dir_dup/fastuniq_input_list.txt
+
+for file in $output_dir_trim/*1000reads_paired*
+do 
+	STEM=$(basename "${file}" 1_1000reads_paired.fastq)
+
+	file1=$file
+	file2=$output_dir_trim/${STEM}2_1000reads_paired.fastq
+
+	$file1 >> $fastuniq_input_list
+	$file2 >> $fastuniq_input_list
+done
+
+# Run FastUniq
+$fastuniq_location -i $fastuniq_input_list -t q -o $output_dir_dup/1.fastq -p $output_dir_dup/2.fastq
