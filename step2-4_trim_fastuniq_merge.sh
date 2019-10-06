@@ -10,7 +10,7 @@ trimmomatic_location=/home/xzyao/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmo
 # FastUniq 
 fastuniq_location=/home/xzyao/miniconda3/pkgs/fastuniq-1.1-h470a237_1/bin/fastuniq
 #PEAR
-pear_location=/share/lemaylab-backedup/milklab/programs/pear-0.9.6
+pear_location=/share/lemaylab-backedup/milklab/programs/pear-0.9.6/pear-0.9.6
 
 
 ###################################################################
@@ -76,6 +76,8 @@ done
 ###################################################################
 #
 # STEP 4: Merge paired-end reads
+# Link to PEAR website: https://cme.h-its.org/exelixis/web/software/pear/
+# https://www.h-its.org/research/cme/software/#NextGenerationSequencingSequenceAnalysis
 
 echo "NOW STARTING PAIRED-END MERGING WITH PEAR AT: "; date
 
@@ -83,10 +85,11 @@ echo "NOW STARTING PAIRED-END MERGING WITH PEAR AT: "; date
 output_dir_pear=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step4_pear
 
 for file in $output_dir_dup/*1_100reads_dup.fastq
+do
 	STEM=$(basename "${file}" 1_100reads_dup.fastq)
 
 	file1=$file
 	file2=$output_dir_dup/${STEM}2_100reads_dup.fastq
 
-	$pear_location -f $file1 -r $file2 -o $output_dir_pear/${STEM}_1000reads_merged.fastq
+	$pear_location -f $file1 -r $file2 -o $output_dir_pear/${STEM} -j 5 # run on 5 threads
 done
