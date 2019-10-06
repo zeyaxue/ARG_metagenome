@@ -9,6 +9,9 @@
 trimmomatic_location=/home/xzyao/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic-0.39-1/trimmomatic.jar
 # FastUniq 
 fastuniq_location=/home/xzyao/miniconda3/pkgs/fastuniq-1.1-h470a237_1/bin/fastuniq
+#PEAR
+pear_location=/share/lemaylab-backedup/milklab/programs/pear-0.9.6
+
 
 ###################################################################
 #
@@ -31,7 +34,7 @@ do
 	file1=$file
 	file2=$input_dir_trim/${STEM}2_nohuman_1000reads.fastq
 
-	java -jar $trimmomatic_location PE $file1 $file2 $output_dir_trim/${STEM}1_1000reads_paired.fastq $output_dir_trim/${STEM}1_1000reads_unpaired.fastq.gz $output_dir_trim/${STEM}2_1000reads_paired.fastq $output_dir_trim/${STEM}2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
+	java -jar $trimmomatic_location PE -threads 5 -trimlog output_dir_trim/trimmomatic_log.txt $file1 $file2 $output_dir_trim/${STEM}1_1000reads_paired.fastq $output_dir_trim/${STEM}1_1000reads_unpaired.fastq.gz $output_dir_trim/${STEM}2_1000reads_paired.fastq $output_dir_trim/${STEM}2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
 done
 
 
@@ -66,4 +69,24 @@ do
 
 	# clear the content of the list file so that FastUniq takes only 2 files every time it runs
 	> $fastuniq_input_list
+done
+
+
+
+###################################################################
+#
+# STEP 4: Merge paired-end reads
+
+echo "NOW STARTING PAIRED-END MERGING WITH PEAR AT: "; date
+
+#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step4_pear
+output_dir_pear=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step4_pear
+
+for file in $output_dir_dup/*1_100reads_dup.fastq
+	STEM=$(basename "${file}" 1_100reads_dup.fastq)
+
+	file1=$file
+	file2=$output_dir_dup/${STEM}2_100reads_dup.fastq
+
+	$pear_location -f $file1 -r $file2 -o $output_dir_pear/${STEM}_1000reads_merged.fastq
 done
