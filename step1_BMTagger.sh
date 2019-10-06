@@ -63,12 +63,12 @@ do
         basename=$(echo $filename | cut -f 1 -d "_")
 	outname="$output_files_location/$basename"
 
-        if [ -f $outname.R1_nohuman.fastq ]
+        if [ -f $outname.human.txt ]
         then 
                 echo $outname.human.txt already exist and will not be overwritten.
         else
                 echo $outname.human.txt does not exist. Running BMTagger now...
-                #$bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
+                $bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
 
                 # filterbyname.sh is included in the bbmap module
                 # The file path is /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh
