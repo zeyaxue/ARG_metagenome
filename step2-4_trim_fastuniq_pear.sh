@@ -54,6 +54,9 @@ fastuniq_input_list=$output_dir_dup/fastuniq_input_list.txt
 
 for file in $output_dir_trim/*R1_paired.fastq
 do 
+	# clear the content of the list file so that FastUniq takes only 2 files every time it runs
+	> $fastuniq_input_list
+
 	STEM=$(basename "${file}" 1_paired.fastq)
 
 	file1=$file
@@ -66,9 +69,6 @@ do
 	# Because FastUniq can only write out 2 files for forward and reverse
 	# Run FastUniq
 	$fastuniq_location -i $fastuniq_input_list -t q -o $output_dir_dup/${STEM}1_dup.fastq -p $output_dir_dup/${STEM}2_dup.fastq
-
-	# clear the content of the list file so that FastUniq takes only 2 files every time it runs
-	> $fastuniq_input_list
 done
 
 
