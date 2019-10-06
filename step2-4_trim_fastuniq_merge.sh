@@ -22,16 +22,16 @@ module load java trimmomatic
 
 input_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset
 #mkdir /share/lemaylab-backedup/Zeya/proceesed_data/step2_trim/ # only need to run once 
-output_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step2_trim/
+output_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step2_trim
 
 for file in $input_dir_trim/*R1_nohuman_1000* 
 do
 	STEM=$(basename "${file}" 1_nohuman_1000reads.fastq)
 
 	file1=$file
-	file2=$input_dir/${STEM}2_nohuman_1000reads.fastq
+	file2=$input_dir_trim/${STEM}2_nohuman_1000reads.fastq
 
-	java -jar $trimmomatic_location PE $file1 $file2 $output_dir_trim/${STEM}1_1000reads_paired.fastq $output_dir/${STEM}1_1000reads_unpaired.fastq.gz $output_dir/${STEM}2_1000reads_paired.fastq $output_dir/${STEM}2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
+	java -jar $trimmomatic_location PE $file1 $file2 $output_dir_trim/${STEM}1_1000reads_paired.fastq $output_dir_trim/${STEM}1_1000reads_unpaired.fastq.gz $output_dir_trim/${STEM}2_1000reads_paired.fastq $output_dir_trim/${STEM}2_1000reads_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
 done
 
 
@@ -47,17 +47,17 @@ echo "NOW STARTING REMOVING DUPLICATE READS AT: "; date
 output_dir_dup=/share/lemaylab-backedup/Zeya/proceesed_data/test_no_humuan_dataset/step3_fastuniq
 
 touch $output_dir_dup/fastuniq_input_list.txt
-$fastuniq_input_list=$output_dir_dup/fastuniq_input_list.txt
+fastuniq_input_list=$output_dir_dup/fastuniq_input_list.txt
 
-for file in $output_dir_trim/*1000reads_paired*
+for file in $output_dir_trim/*R1_1000reads_paired.fastq
 do 
 	STEM=$(basename "${file}" 1_1000reads_paired.fastq)
 
 	file1=$file
 	file2=$output_dir_trim/${STEM}2_1000reads_paired.fastq
 
-	$file1 >> $fastuniq_input_list
-	$file2 >> $fastuniq_input_list
+	echo $file1 >> $fastuniq_input_list
+	echo $file2 >> $fastuniq_input_list
 done
 
 # Run FastUniq
