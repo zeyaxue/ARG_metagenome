@@ -28,7 +28,7 @@ output_dir_dup=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_f
 #touch $output_dir_dup/fastuniq_input_list.txt
 fastuniq_input_list=$output_dir_dup/fastuniq_input_list.txt
 
-for ((file in $input_dir_dup/5006.R1_nohuman.fastq && file in $input_dir_dup/5007.R1_nohuman.fastq)) # test with 4 files first (5002, 5005, 5006, 5007)
+for file in $input_dir_dup/5007.R1_nohuman.fastq # test with 4 files first (5002, 5005, 5006, 5007)
 do 
 	# clear the content of the list file so that FastUniq takes only 2 files every time it runs
 	> $fastuniq_input_list
@@ -58,23 +58,17 @@ echo "NOW STARTING READ CLEANING WITH TRIMMOMATIC AT: "; date
 
 module load java trimmomatic
 
-#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_fastuniq_trim_pear/step3_trim/ # only need to run once 
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_fastuniq_trim_pear/step3_trim/ # only need to run once 
 output_dir_trim=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_fastuniq_trim_pear/step3_trim
 
 for file in $output_dir_dup/*R1_dup.fastq
 do
 	STEM=$(basename "${file}" 1_dup.fastq)
-	
-	if [ -f $output_dir_trim/${STEM}1_paired.fastq ]
-	then	
-		echo $output_dir_trim/${STEM}1_paired.fastq exist
-	else
-		echo Trimming now....
-		file1=$file
-		file2=$output_dir_dup/${STEM}2_dup.fastq
 
-		java -jar $trimmomatic_location PE -threads 5 -trimlog $output_dir_trim/trimmomatic_log.txt $file1 $file2 $output_dir_trim/${STEM}1_paired.fastq $output_dir_trim/${STEM}1_unpaired.fastq.gz $output_dir_trim/${STEM}2_paired.fastq $output_dir_trim/${STEM}2_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
-	fi
+	file1=$file
+	file2=$output_dir_dup/${STEM}2_dup.fastq
+
+	java -jar $trimmomatic_location PE -threads 5 -trimlog $output_dir_trim/trimmomatic_log.txt $file1 $file2 $output_dir_trim/${STEM}1_paired.fastq $output_dir_trim/${STEM}1_unpaired.fastq.gz $output_dir_trim/${STEM}2_paired.fastq $output_dir_trim/${STEM}2_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
 done
 
 
@@ -87,7 +81,7 @@ done
 
 echo "NOW STARTING PAIRED-END MERGING WITH PEAR AT: "; date
 
-#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_fastuniq_trim_pear/step4_pear
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_fastuniq_trim_pear/step4_pear
 output_dir_pear=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_fastuniq_trim_pear/step4_pear
 echo $output_dir_trim
 
@@ -96,7 +90,7 @@ do
 	STEM=$(basename "${file}" R1_paired.fastq)
 
 	file1=$file
-	file2=$output_dir_dup/${STEM}R2_paired.fastq
+	file2=$output_dir_trim/${STEM}R2_paired.fastq
 
 	$pear_location -f $file1 -r $file2 -o $output_dir_pear/${STEM} -j 5 # run on 5 threads
 done
