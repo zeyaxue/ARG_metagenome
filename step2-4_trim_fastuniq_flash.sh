@@ -16,7 +16,8 @@ flash_location=/share/lemaylab-backedup/milklab/programs/FLASH-1.2.11_2019/FLASH
 #
 # STEP 2: USE TRIMMOMATIC TO REMOVE LOW-QUALITY READS
 # Take input from BMTagger (removal of the human DNA)
-# Trimmomatic parameters followed this paper (Taft et al., 2018, mSphere), using the paired end mode 
+# Trimmomatic parameters followed this paper (Taft et al., 2018, mSphere) and using the paired end mode 
+# from link: http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf
 
 #echo "NOW STARTING READ CLEANING WITH TRIMMOMATIC AT: "; date 
 
@@ -32,8 +33,9 @@ flash_location=/share/lemaylab-backedup/milklab/programs/FLASH-1.2.11_2019/FLASH
 #
 #	file1=$file
 #	file2=$input_dir_trim/${STEM}2_nohuman.fastq
-#
-#	java -jar $trimmomatic_location PE -threads 5 -trimlog $output_dir_trim/trimmomatic_log.txt $file1 $file2 $output_dir_trim/${STEM}1_paired.fastq $output_dir_trim/${STEM}1_unpaired.fastq.gz $output_dir_trim/${STEM}2_paired.fastq $output_dir_trim/${STEM}2_unpaired.fastq.gz -phred33 SLIDINGWINDOW:4:15 MINLEN:99
+#	
+#	# remove adapter and trimming at the same time (TrueSeq3-PE-2.fa, PE1_rc and PE2_rc)
+#	java -jar $trimmomatic_location PE -threads 5 -trimlog $output_dir_trim/trimmomatic_log.txt $file1 $file2 $output_dir_trim/${STEM}1_paired.fastq $output_dir_trim/${STEM}1_unpaired.fastq.gz $output_dir_trim/${STEM}2_paired.fastq $output_dir_trim/${STEM}2_unpaired.fastq.gz -phred33 /share/lemaylab-backedup/milklab/programs/trimmomatic_adapter_input.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:99
 #done
 #
 #
