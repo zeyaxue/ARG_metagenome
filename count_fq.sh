@@ -29,9 +29,8 @@ else
 	echo "Please input between fq and gz" 
 fi
 
-# organize file and move to new location
-#mv $indir/count_fq_log.txt /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq072/count_fq_log.txt
-cd /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq072/
+# organize file
+cd $indir
 
 # Make sampleID column
 ## I tried over several hours to wrangle the data in variables but that did not work
@@ -46,5 +45,5 @@ awk 'NR%2==0' count_fq_log.txt > col2.txt
 $(echo lib_size > col2a.txt)
 $(awk 'NR%2==1' col2.txt >> col2a.txt)
 
-$(paste col1b.txt col2a.txt -d "\t" > lib_size_NovaSeq_072.txt)
+$(paste col1b.txt col2a.txt -d "\t" > lib_size.txt)
 rm col*
