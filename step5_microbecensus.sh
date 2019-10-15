@@ -1,4 +1,10 @@
 #!/bin/bash
+#SBATCH --mail-user=zhxue@ucdavis.edu
+#SBATCH --mail-type=ALL
+#SBATCH --job-name=MicrobeCensus
+#SBATCH --error=MC.err
+#SBATCH --time=5-00:00:00
+#SBATCH --mem=500GB
 
 # MicrobeCensus location
 mc_location=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/run_microbe_census.py 
@@ -12,7 +18,7 @@ mc_location=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microb
 echo "NOW STARTING NORMALIZATION WITH MicrobeCensus AT: "; date
 
 output_dir_flash=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_trim_fastuniq_flash/step4_flash
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MC_test
+#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MC_test
 output_dir_mc=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MC_test
 
 # change dir for writing temporary files
@@ -27,5 +33,5 @@ do
 
 	# -h for help
 	# -t thread number
-	$mc_location $file output_dir_mc/${STEM}_mc.fastq -t 8
+	$mc_location $file $output_dir_mc/${STEM}_mc.txt -t 15
 done
