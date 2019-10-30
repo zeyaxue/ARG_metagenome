@@ -10,7 +10,6 @@ echo "NOW STARTING ALIGNMENT WITH DIAMOND AT: "; date
 megares_db=/share/lemaylab-backedup/milklab/database/megares_v2/megares_modified_database_v2.00.fasta
 
 # Location and version of bwa module: /software/bwa/0.7.16a/lssc0-linux/bwa
-# BWA aligner manual: http://bio-bwa.sourceforge.net/bwa.shtml
 module load bwa 
 
 output_dir_flash=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_trim_fastuniq_flash/step4_flash
@@ -22,7 +21,9 @@ do
 	STEM=$(basename "$file" ..extendedFrags.fastq) 
 
 	# use the bwa mem method for fastest speed and accuracy
-	bwa mem $megares_db $file > $output_dir_megares/${STEM}_align.sam
+	# BWA aligner manual: http://bio-bwa.sourceforge.net/bwa.shtml
+	# -t: thread
+	bwa mem -t 7 $megares_db $file > $output_dir_megares/${STEM}_align.sam
 
 done
 
