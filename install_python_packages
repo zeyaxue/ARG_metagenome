@@ -1,0 +1,14 @@
+# on spitfire 
+
+# Add the installed directory to PATH (otherwise pip will not work)
+export PATH="/home/xzyao/.local/bin:$PATH" # replace xzyao with your userid
+
+# install Biopython package
+pip install biopython --user # /afs/genomecenter.ucdavis.edu/home/xzyao/.local/lib/python2.7/site-packages 
+
+# install cogent.parse.fastq from cogent package
+pip install cogent --user
+
+# install pandas
+export PATH="/home/xzyao/miniconda3/bin:$PATH"
+conda install pandas
