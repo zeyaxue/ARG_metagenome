@@ -1,7 +1,11 @@
 #!/bin/bash
 
 ########################################################################################################################
+# 
+# DEFINE RUN FOLDER
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq072
 
+########################################################################################################################
 
 ########################################################################################################################
 #
@@ -11,7 +15,7 @@
 #
 ## set input and output file paths
 #raw_indir=/share/lemaylab-backedup/Zeya/raw_data/NovaSeq043/tb957t8xg/Un_DTDB73/Project_DLZA_Nova043P_Alkan
-#unzip_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/unzipped
+#unzip_outdir=$run_dir/unzipped
 #
 ## for loop to unzip all gz file to fastq in one file 
 #for file in $raw_indir/*fastq.gz
@@ -41,8 +45,8 @@
 
 ## Set input and output file paths
 #human_db=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13
-#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output
-bmtagger_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_BMTagger_output
+#mkdir $run_dir/step_1_BMTagger_output
+bmtagger_outdir=$run_dir/step1_BMTagger
 #
 ## Make sure bash knows where to look for softwares 
 #PATH=$PATH:/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger
@@ -95,8 +99,8 @@ bmtagger_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step_1_B
 echo "NOW STARTING READ CLEANING WITH TRIMMOMATIC AT: "; date 
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2_trim/ 
-trim_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2_trim
+mkdir $run_dir/step2_trim/ 
+trim_outdir=$run_dir/step2_trim
 
 # Make sure bash knows where to look for softwares 
 trimmomatic_dir=/share/lemaylab-backedup/milklab/programs/
@@ -132,8 +136,8 @@ echo "STEP 2 DONE AT: "; date
 echo "NOW STARTING REMOVING DUPLICATE READS AT: "; date 
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step3_fastuniq
-dup_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step3_fastuniq
+mkdir $run_dir/step3_fastuniq
+dup_outdir=$run_dir/step3_fastuniq
 
 # Make sure bash knows where to look for softwares 
 fastuniq=/share/lemaylab-backedup/milklab/programs/fastuniq-1.1-h470a237_1/bin/fastuniq
@@ -176,8 +180,8 @@ echo "STEP 3 DONE AT: "; date
 echo "NOW STARTING PAIRED-END MERGING WITH FLASH AT: "; date
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step4_flash
-flash_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step4_flash
+mkdir $run_dir/step4_flash
+flash_outdir=$run_dir/step4_flash
 
 # Make sure bash knows where to look for softwares 
 flash=/share/lemaylab-backedup/milklab/programs/FLASH-1.2.11_2019/FLASH-1.2.11-Linux-x86_64/flash
@@ -208,8 +212,8 @@ echo "STEP 4 DONE AT: "; date
 echo "NOW CALCULATING GENOME EQUIVALENTS PER METAGENOME WITH MICROBECENSUS AT: "; date
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MicrobeCensus
-mc_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MicrobeCensus
+mkdir $run_dir/step5_MicrobeCensus
+mc_outdir=$run_dir/step5_MicrobeCensus
 
 # Make sure bash knows where to look for softwares 
 microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/run_microbe_census.py 
@@ -239,8 +243,8 @@ echo "STEP 5 DONE AT: "; date
 echo "NOW STARTING ALIGNMENT TO MEGARES_v2 WITH BWA AT: "; date
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step6_megares_bwa
-megares_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step6_megares_bwa
+mkdir $run_dir/step6_megares_bwa
+megares_outdir=$run_dir/step6_megares_bwa
 # megares db including both drug, metal and biocide resistance genes
 megares_dir=/share/lemaylab-backedup/milklab/database/megares_v2/
 
@@ -270,9 +274,9 @@ echo "STEP 6 DONE AT: "; date
 echo "NOW MAKING COUNT TABLE AT: "; date
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/resistomeanalyzer_output
-ra_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/resistomeanalyzer_output
+mkdir $run_dir/step7_norm_count_tab/
+mkdir $run_dir/step7_norm_count_tab/resistomeanalyzer_output
+ra_outdir=$run_dir/step7_norm_count_tab/resistomeanalyzer_output
 
 # Make sure bash knows where to look for softwares 
 ranalyzer=/share/lemaylab-backedup/milklab/programs/resistomeanalyzer/resistome
@@ -297,8 +301,8 @@ done
 echo "NOW STARTING COUNT TABLE NORMALIZATION AT: "; date
 
 # Set input and output file paths
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/normalized_tab
-norm_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/normalized_tab
+mkdir $run_dir/step7_norm_count_tab/normalized_tab
+norm_outdir=$run_dir/step7_norm_count_tab/normalized_tab
 
 # Make sure bash knows where to look for softwares 
 norm=/share/lemaylab-backedup/Zeya/scripts/gitSRC/ARG_metagenome/make_RPKG_normtab.py
@@ -319,8 +323,8 @@ done
 
 # use the python script again to merge tables
 python $norm \
-	--mergeout $norm_outdir/merge_norm_final.tsv \
-	--mergein $norm_outdir/*_norm.tsv 
+--mergeout $norm_outdir/merge_norm_final.tsv \
+--mergein $norm_outdir/*_norm.tsv 
 
 
 echo "STEP 7 DONE AT: "; date
