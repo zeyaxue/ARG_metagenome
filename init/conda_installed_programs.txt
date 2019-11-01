@@ -1,0 +1,10 @@
+# trimmomatic-0.39-1.jar 
+I copied the core java script from /home/xzyao/miniconda3/pkgs/trimmomatic-0.39-1/share/trimmomatic-0.39-1/trimmomatic.jar to /share/lemaylab-backedup/milklab/programs/trimmomatic-0.39-1.jar
+
+Installation script can be found /share/lemaylab-backedup/Zeya/scripts/gitSRC/ARG_metagenome/install_Trimmomatic-0.39 and online at https://github.com/zeyaxue/ARG_metagenome/blob/master/install_Trimmomatic-0.39.sh
+
+
+# fastuniq
+The actual core software location /share/lemaylab-backedup/milklab/programs/fastuniq-1.1-h470a237_1/bin/fastuniq copied from /home/xzyao/miniconda3/pkgs/fastuniq-1.1-h470a237_1/
+
+Installation script can be found /share/lemaylab-backedup/Zeya/scripts/gitSRC/ARG_metagenome/install_FastUniq and online at https://github.com/zeyaxue/ARG_metagenome/blob/master/install_FastUniq.sh

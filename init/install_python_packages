@@ -11,4 +11,4 @@ pip install cogent --user
 
 # install pandas
 export PATH="/home/xzyao/miniconda3/bin:$PATH"
-conda install pandas
+pip install pandas --user
