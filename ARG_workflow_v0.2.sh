@@ -218,6 +218,9 @@ mc_outdir=$run_dir/step5_MicrobeCensus
 # Make sure bash knows where to look for softwares 
 microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/run_microbe_census.py 
 
+########################################################################################################################
+# ADD TO env "ARG-py37" required packages such as numpy
+########################################################################################################################
 # change dir for writing temporary files
 export TMPDIR=$mc_outdir
 # Add the numpy/python path to $PATH
