@@ -1,0 +1,1368 @@
+Last login: Sat Nov  2 23:36:57 on ttys000
+localadmins-MacBook-Pro:~ z.xue$ ssh xzyao@spitfire.genomecenter.ucdavis.edu
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.15.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+                                                                           
+                                                       .c:                 
+                                              ..       ol:                 
+   ...                                      . ..,;;,''dxd,                 
+   .';::::;'..                             .;.,;;:l:'okdl:;,'...           
+      ..:oddxxdoc,..                 .';:;:xkxlolodd':l,                   
+          .':c:cccllc:,..      ;x:.'ldddlloxdol,:,dc..''                   
+              .,:xdocccllcc;':do::ldkxxxxxxkcl:::'.                        
+                 .'cddll:,'lxkdxkkO0000000Okdo'                            
+                     .';...,ckOkkkkO0000K000o                              
+                         .;,cxkOkk0K0OOkxxddl'..                           
+                          loc;,loldxxdoc:;;:::clllc:;'...                  
+                         oXOO;       :,.',,;::llcccllloddol:;'..           
+                         :oo'       co;         ...',,;:ldddoooll:;'..     
+                           .;      lxN0o                   .....:,;;;;;'   
+                                     od.                                   
+                                                                           
+                                _ _    __ _          
+          Welcome to  ___ _ __ (_) |_ / _(_)_ __ ___ 
+                     / __| '_ \| | __| |_| | '__/ _ \
+                     \__ \ |_) | | |_|  _| | | |  __/
+                     |___/ .__/|_|\__|_| |_|_|  \___|
+                         |_|                    .genomecenter.ucdavis.edu     
+Last login: Sat Nov  2 23:37:10 2019 from 71.202.96.23
+groups: cannot find name for group ID 1092646845
+Module slurm-17.11.2-lssc0-linux loaded. Commands for scheduling Slurm jobs.
+xzyao@spitfire:~$ LS
+-bash: LS: command not found
+xzyao@spitfire:~$ ls
+microbe_census	miniconda3
+xzyao@spitfire:~$ rm -rf miniconda3
+xzyao@spitfire:~$ rm -rf ~/.condarc ~/.conda ~/.continuum
+xzyao@spitfire:~$ less ~/.bash_profile
+/home/xzyao/.bash_profile: No such file or directory
+xzyao@spitfire:~$ cd /share/lemaylab-backedup/Zeya/
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ ls
+Miniconda3-latest-Linux-x86_64.sh  proceesed_data  raw_data  scripts
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ bash Miniconda3-latest-Linux-x86_64.sh
+
+Welcome to Miniconda3 4.7.10
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>> 
+===================================
+Miniconda End User License Agreement
+===================================
+
+Copyright 2015, Anaconda, Inc.
+
+All rights reserved under the 3-clause BSD License:
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the docume
+ntation and/or other materials provided with the distribution.
+  * Neither the name of Anaconda, Inc. ("Anaconda, Inc.") nor the names of its contributors may be used to endorse or promote products derived f
+rom this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO
+, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ANACONDA, INC. BE LIABLE FOR 
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS O
+R SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Notice of Third Party Software Licenses
+=======================================
+
+Miniconda contains open source software packages from third parties. These are available on an "as is" basis and subject to their individual lic
+ense agreements. These licenses are available in Anaconda Distribution or at http://docs.anaconda.com/anaconda/pkg-docs. Any binary packages of 
+these third party tools you obtain via Anaconda Distribution are subject to their individual licenses as well as the Anaconda license. Anaconda,
+ Inc. reserves the right to change which third party tools are provided in Miniconda.
+
+Cryptography Notice
+===================
+
+This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, us
+e, and/or re-export to another country, of encryption software. BEFORE using any encryption software, please check your country's laws, regulati
+ons and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted. See the Wassenaar
+ Arrangement http://www.wassenaar.org/ for more information.
+
+Anaconda, Inc. has self-classified this software as Export Commodity Control Number (ECCN) 5D992b, which includes mass market information securi
+ty software using or performing cryptographic functions with asymmetric algorithms. No license is required for export of this software to non-em
+bargoed countries. In addition, the Intel(TM) Math Kernel Library contained in Anaconda, Inc.'s software is classified by Intel(TM) as ECCN 5D99
+2b with no license required for export to non-embargoed countries.
+
+The following packages are included in this distribution that relate to cryptography:
+
+openssl
+    The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the
+ Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library.
+
+pycrypto
+    A collection of both secure hash functions (such as SHA256 and RIPEMD160), and various encryption algorithms (AES, DES, RSA, ElGamal, etc.).
+
+pyopenssl
+    A thin Python wrapper around (a subset of) the OpenSSL library.
+
+kerberos (krb5, non-Windows platforms)
+    A network authentication protocol designed to provide strong authentication for client/server applications by using secret-key cryptography.
+
+cryptography
+    A Python library which exposes cryptographic recipes and primitives.
+
+
+Do you accept the license terms? [yes|no]
+[no] >>> 
+Please answer 'yes' or 'no':'
+>>> yes
+
+Miniconda3 will now be installed into this location:
+/home/xzyao/miniconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/home/xzyao/miniconda3] >>> /share/lemaylab-backedup/Zeya/
+ERROR: File or directory already exists: '/share/lemaylab-backedup/Zeya/'
+If you want to update an existing installation, use the -u option.
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ bash Miniconda3-latest-Linux-x86_64.sh
+
+Welcome to Miniconda3 4.7.10
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>> 
+===================================
+Miniconda End User License Agreement
+===================================
+
+Copyright 2015, Anaconda, Inc.
+
+All rights reserved under the 3-clause BSD License:
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the docume
+ntation and/or other materials provided with the distribution.
+  * Neither the name of Anaconda, Inc. ("Anaconda, Inc.") nor the names of its contributors may be used to endorse or promote products derived f
+rom this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO
+, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ANACONDA, INC. BE LIABLE FOR 
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS O
+R SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Notice of Third Party Software Licenses
+=======================================
+
+Miniconda contains open source software packages from third parties. These are available on an "as is" basis and subject to their individual lic
+ense agreements. These licenses are available in Anaconda Distribution or at http://docs.anaconda.com/anaconda/pkg-docs. Any binary packages of 
+these third party tools you obtain via Anaconda Distribution are subject to their individual licenses as well as the Anaconda license. Anaconda,
+ Inc. reserves the right to change which third party tools are provided in Miniconda.
+
+Cryptography Notice
+===================
+
+This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, us
+e, and/or re-export to another country, of encryption software. BEFORE using any encryption software, please check your country's laws, regulati
+ons and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted. See the Wassenaar
+ Arrangement http://www.wassenaar.org/ for more information.
+
+Anaconda, Inc. has self-classified this software as Export Commodity Control Number (ECCN) 5D992b, which includes mass market information securi
+ty software using or performing cryptographic functions with asymmetric algorithms. No license is required for export of this software to non-em
+bargoed countries. In addition, the Intel(TM) Math Kernel Library contained in Anaconda, Inc.'s software is classified by Intel(TM) as ECCN 5D99
+2b with no license required for export to non-embargoed countries.
+
+The following packages are included in this distribution that relate to cryptography:
+
+openssl
+    The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the
+ Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library.
+
+pycrypto
+    A collection of both secure hash functions (such as SHA256 and RIPEMD160), and various encryption algorithms (AES, DES, RSA, ElGamal, etc.).
+
+pyopenssl
+    A thin Python wrapper around (a subset of) the OpenSSL library.
+
+kerberos (krb5, non-Windows platforms)
+    A network authentication protocol designed to provide strong authentication for client/server applications by using secret-key cryptography.
+
+cryptography
+    A Python library which exposes cryptographic recipes and primitives.
+
+
+Do you accept the license terms? [yes|no]
+[no] >>> 
+Please answer 'yes' or 'no':'
+>>> yes
+
+Miniconda3 will now be installed into this location:
+/home/xzyao/miniconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/home/xzyao/miniconda3] >>> /share/lemaylab-backedup/Zeya/miniconda3
+PREFIX=/share/lemaylab-backedup/Zeya/miniconda3
+Unpacking payload ...
+Collecting package metadata (current_repodata.json): done                                                 
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /share/lemaylab-backedup/Zeya/miniconda3
+
+  added / updated specs:
+    - _libgcc_mutex==0.1=main
+    - asn1crypto==0.24.0=py37_0
+    - bzip2==1.0.8=h7b6447c_0
+    - ca-certificates==2019.5.15=0
+    - certifi==2019.6.16=py37_0
+    - cffi==1.12.3=py37h2e261b9_0
+    - chardet==3.0.4=py37_1
+    - conda-package-handling==1.3.11=py37_0
+    - conda==4.7.10=py37_0
+    - cryptography==2.7=py37h1ba5d50_0
+    - idna==2.8=py37_0
+    - libarchive==3.3.3=h5d8350f_5
+    - libedit==3.1.20181209=hc058e9b_0
+    - libffi==3.2.1=hd88cf55_4
+    - libgcc-ng==9.1.0=hdf63c60_0
+    - libstdcxx-ng==9.1.0=hdf63c60_0
+    - libxml2==2.9.9=hea5a465_1
+    - lz4-c==1.8.1.2=h14c3975_0
+    - lzo==2.10=h49e0be7_2
+    - ncurses==6.1=he6710b0_1
+    - openssl==1.1.1c=h7b6447c_1
+    - pip==19.1.1=py37_0
+    - pycosat==0.6.3=py37h14c3975_0
+    - pycparser==2.19=py37_0
+    - pyopenssl==19.0.0=py37_0
+    - pysocks==1.7.0=py37_0
+    - python-libarchive-c==2.8=py37_11
+    - python==3.7.3=h0371630_0
+    - readline==7.0=h7b6447c_5
+    - requests==2.22.0=py37_0
+    - ruamel_yaml==0.15.46=py37h14c3975_0
+    - setuptools==41.0.1=py37_0
+    - six==1.12.0=py37_0
+    - sqlite==3.29.0=h7b6447c_0
+    - tk==8.6.8=hbc83047_0
+    - tqdm==4.32.1=py_0
+    - urllib3==1.24.2=py37_0
+    - wheel==0.33.4=py37_0
+    - xz==5.2.4=h14c3975_4
+    - yaml==0.1.7=had09818_2
+    - zlib==1.2.11=h7b6447c_3
+    - zstd==1.3.7=h0b5b093_0
+
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
+  asn1crypto         pkgs/main/linux-64::asn1crypto-0.24.0-py37_0
+  bzip2              pkgs/main/linux-64::bzip2-1.0.8-h7b6447c_0
+  ca-certificates    pkgs/main/linux-64::ca-certificates-2019.5.15-0
+  certifi            pkgs/main/linux-64::certifi-2019.6.16-py37_0
+  cffi               pkgs/main/linux-64::cffi-1.12.3-py37h2e261b9_0
+  chardet            pkgs/main/linux-64::chardet-3.0.4-py37_1
+  conda              pkgs/main/linux-64::conda-4.7.10-py37_0
+  conda-package-han~ pkgs/main/linux-64::conda-package-handling-1.3.11-py37_0
+  cryptography       pkgs/main/linux-64::cryptography-2.7-py37h1ba5d50_0
+  idna               pkgs/main/linux-64::idna-2.8-py37_0
+  libarchive         pkgs/main/linux-64::libarchive-3.3.3-h5d8350f_5
+  libedit            pkgs/main/linux-64::libedit-3.1.20181209-hc058e9b_0
+  libffi             pkgs/main/linux-64::libffi-3.2.1-hd88cf55_4
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
+  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
+  libxml2            pkgs/main/linux-64::libxml2-2.9.9-hea5a465_1
+  lz4-c              pkgs/main/linux-64::lz4-c-1.8.1.2-h14c3975_0
+  lzo                pkgs/main/linux-64::lzo-2.10-h49e0be7_2
+  ncurses            pkgs/main/linux-64::ncurses-6.1-he6710b0_1
+  openssl            pkgs/main/linux-64::openssl-1.1.1c-h7b6447c_1
+  pip                pkgs/main/linux-64::pip-19.1.1-py37_0
+  pycosat            pkgs/main/linux-64::pycosat-0.6.3-py37h14c3975_0
+  pycparser          pkgs/main/linux-64::pycparser-2.19-py37_0
+  pyopenssl          pkgs/main/linux-64::pyopenssl-19.0.0-py37_0
+  pysocks            pkgs/main/linux-64::pysocks-1.7.0-py37_0
+  python             pkgs/main/linux-64::python-3.7.3-h0371630_0
+  python-libarchive~ pkgs/main/linux-64::python-libarchive-c-2.8-py37_11
+  readline           pkgs/main/linux-64::readline-7.0-h7b6447c_5
+  requests           pkgs/main/linux-64::requests-2.22.0-py37_0
+  ruamel_yaml        pkgs/main/linux-64::ruamel_yaml-0.15.46-py37h14c3975_0
+  setuptools         pkgs/main/linux-64::setuptools-41.0.1-py37_0
+  six                pkgs/main/linux-64::six-1.12.0-py37_0
+  sqlite             pkgs/main/linux-64::sqlite-3.29.0-h7b6447c_0
+  tk                 pkgs/main/linux-64::tk-8.6.8-hbc83047_0
+  tqdm               pkgs/main/noarch::tqdm-4.32.1-py_0
+  urllib3            pkgs/main/linux-64::urllib3-1.24.2-py37_0
+  wheel              pkgs/main/linux-64::wheel-0.33.4-py37_0
+  xz                 pkgs/main/linux-64::xz-5.2.4-h14c3975_4
+  yaml               pkgs/main/linux-64::yaml-0.1.7-had09818_2
+  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
+  zstd               pkgs/main/linux-64::zstd-1.3.7-h0b5b093_0
+
+
+Preparing transaction: done
+Executing transaction: \ WARNING conda.core.envs_manager:register_env(46): Unable to register environment. Path not writable or missing.
+  environment location: /share/lemaylab-backedup/Zeya/miniconda3
+  registry file: /home/xzyao/.conda/environments.txt
+done
+installation finished.
+Do you wish the installer to initialize Miniconda3
+by running conda init? [yes|no]
+[no] >>> yes
+no change     /share/lemaylab-backedup/Zeya/miniconda3/condabin/conda
+no change     /share/lemaylab-backedup/Zeya/miniconda3/bin/conda
+no change     /share/lemaylab-backedup/Zeya/miniconda3/bin/conda-env
+no change     /share/lemaylab-backedup/Zeya/miniconda3/bin/activate
+no change     /share/lemaylab-backedup/Zeya/miniconda3/bin/deactivate
+no change     /share/lemaylab-backedup/Zeya/miniconda3/etc/profile.d/conda.sh
+no change     /share/lemaylab-backedup/Zeya/miniconda3/etc/fish/conf.d/conda.fish
+no change     /share/lemaylab-backedup/Zeya/miniconda3/shell/condabin/Conda.psm1
+no change     /share/lemaylab-backedup/Zeya/miniconda3/shell/condabin/conda-hook.ps1
+no change     /share/lemaylab-backedup/Zeya/miniconda3/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /share/lemaylab-backedup/Zeya/miniconda3/etc/profile.d/conda.csh
+modified      /home/xzyao/.bashrc
+
+==> For changes to take effect, close and re-open your current shell. <==
+
+If you'd prefer that conda's base environment not be activated on startup, 
+   set the auto_activate_base parameter to false: 
+
+conda config --set auto_activate_base false
+
+Thank you for installing Miniconda3!
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ logout
+Connection to spitfire.genomecenter.ucdavis.edu closed.
+localadmins-MacBook-Pro:~ z.xue$ ssh xzyao@spitfire.genomecenter.ucdavis.edu
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.15.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+                                                                           
+                                                       .c:                 
+                                              ..       ol:                 
+   ...                                      . ..,;;,''dxd,                 
+   .';::::;'..                             .;.,;;:l:'okdl:;,'...           
+      ..:oddxxdoc,..                 .';:;:xkxlolodd':l,                   
+          .':c:cccllc:,..      ;x:.'ldddlloxdol,:,dc..''                   
+              .,:xdocccllcc;':do::ldkxxxxxxkcl:::'.                        
+                 .'cddll:,'lxkdxkkO0000000Okdo'                            
+                     .';...,ckOkkkkO0000K000o                              
+                         .;,cxkOkk0K0OOkxxddl'..                           
+                          loc;,loldxxdoc:;;:::clllc:;'...                  
+                         oXOO;       :,.',,;::llcccllloddol:;'..           
+                         :oo'       co;         ...',,;:ldddoooll:;'..     
+                           .;      lxN0o                   .....:,;;;;;'   
+                                     od.                                   
+                                                                           
+                                _ _    __ _          
+          Welcome to  ___ _ __ (_) |_ / _(_)_ __ ___ 
+                     / __| '_ \| | __| |_| | '__/ _ \
+                     \__ \ |_) | | |_|  _| | | |  __/
+                     |___/ .__/|_|\__|_| |_|_|  \___|
+                         |_|                    .genomecenter.ucdavis.edu     
+Last login: Sat Nov  2 23:39:49 2019 from 71.202.96.23
+groups: cannot find name for group ID 1092646853
+Module slurm-17.11.2-lssc0-linux loaded. Commands for scheduling Slurm jobs.
+xzyao@spitfire:~$ conda config --set auto_activate_base false
+-bash: conda: command not found
+xzyao@spitfire:~$ ls 
+microbe_census
+xzyao@spitfire:~$ cd /share/lemaylab-backedup/Zeya/
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ ls
+miniconda3  Miniconda3-latest-Linux-x86_64.sh  proceesed_data  raw_data  scripts
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ miniconda3/
+bin/                         .cph_tmpceu7ql5u/            .cph_tmplwiocak5/            .cph_tmpvaumajzd/
+compiler_compat/             .cph_tmpceyok3wg/            .cph_tmpmh8hth_b/            .cph_tmpxs44ck5q/
+condabin/                    .cph_tmpd6fade5r/            .cph_tmpmpqqxele/            .cph_tmpxy9bq55r/
+conda-meta/                  .cph_tmpdd814xpd/            .cph_tmpnm877evq/            envs/
+.cph_tmp0ydw9co0/            .cph_tmpd__ei825/            .cph_tmppe09vu24/            etc/
+.cph_tmp2m2b7gis/            .cph_tmpdnn0y2g3/            .cph_tmpqc9batez/            include/
+.cph_tmp2mir04cp/            .cph_tmpepktk_6r/            .cph_tmpqvzua3xm/            lib/
+.cph_tmp36dotukf/            .cph_tmpfl5ls3h3/            .cph_tmpsk7ppuot/            libexec/
+.cph_tmp64u6hz6w/            .cph_tmph02cfkgd/            .cph_tmpsz049p0m/            man/
+.cph_tmp6x7lu8d2/            .cph_tmpi44gg6rz/            .cph_tmpt8hcm836/            pkgs/
+.cph_tmp8g1tabfp/            .cph_tmpj6c45odr/            .cph_tmptfdmj812/            share/
+.cph_tmp984t6qta/            .cph_tmpjdfmbpdx/            .cph_tmpu1ooqi7e/            shell/
+.cph_tmp_bcbsq00/            .cph_tmpjlxyh8mm/            .cph_tmpu5u7c_3v/            ssl/
+.cph_tmpbz9advjc/            .cph_tmpkdrp_ubi/            .cph_tmpudro02up/            x86_64-conda_cos6-linux-gnu/
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ miniconda3/
+bin/                         .cph_tmpceu7ql5u/            .cph_tmplwiocak5/            .cph_tmpvaumajzd/
+compiler_compat/             .cph_tmpceyok3wg/            .cph_tmpmh8hth_b/            .cph_tmpxs44ck5q/
+condabin/                    .cph_tmpd6fade5r/            .cph_tmpmpqqxele/            .cph_tmpxy9bq55r/
+conda-meta/                  .cph_tmpdd814xpd/            .cph_tmpnm877evq/            envs/
+.cph_tmp0ydw9co0/            .cph_tmpd__ei825/            .cph_tmppe09vu24/            etc/
+.cph_tmp2m2b7gis/            .cph_tmpdnn0y2g3/            .cph_tmpqc9batez/            include/
+.cph_tmp2mir04cp/            .cph_tmpepktk_6r/            .cph_tmpqvzua3xm/            lib/
+.cph_tmp36dotukf/            .cph_tmpfl5ls3h3/            .cph_tmpsk7ppuot/            libexec/
+.cph_tmp64u6hz6w/            .cph_tmph02cfkgd/            .cph_tmpsz049p0m/            man/
+.cph_tmp6x7lu8d2/            .cph_tmpi44gg6rz/            .cph_tmpt8hcm836/            pkgs/
+.cph_tmp8g1tabfp/            .cph_tmpj6c45odr/            .cph_tmptfdmj812/            share/
+.cph_tmp984t6qta/            .cph_tmpjdfmbpdx/            .cph_tmpu1ooqi7e/            shell/
+.cph_tmp_bcbsq00/            .cph_tmpjlxyh8mm/            .cph_tmpu5u7c_3v/            ssl/
+.cph_tmpbz9advjc/            .cph_tmpkdrp_ubi/            .cph_tmpudro02up/            x86_64-conda_cos6-linux-gnu/
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ miniconda3/conda
+condabin/   conda-meta/ 
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ miniconda3/conda
+condabin/   conda-meta/ 
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ miniconda3/conda
+condabin/   conda-meta/ 
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ conda list      
+-bash: conda: command not found
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ bash Miniconda3-latest-Linux-x86_64.sh
+
+Welcome to Miniconda3 4.7.10
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>> 
+===================================
+Miniconda End User License Agreement
+===================================
+
+Copyright 2015, Anaconda, Inc.
+
+All rights reserved under the 3-clause BSD License:
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the docume
+ntation and/or other materials provided with the distribution.
+  * Neither the name of Anaconda, Inc. ("Anaconda, Inc.") nor the names of its contributors may be used to endorse or promote products derived f
+rom this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO
+, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ANACONDA, INC. BE LIABLE FOR 
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS O
+R SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Notice of Third Party Software Licenses
+=======================================
+
+Miniconda contains open source software packages from third parties. These are available on an "as is" basis and subject to their individual lic
+ense agreements. These licenses are available in Anaconda Distribution or at http://docs.anaconda.com/anaconda/pkg-docs. Any binary packages of 
+these third party tools you obtain via Anaconda Distribution are subject to their individual licenses as well as the Anaconda license. Anaconda,
+ Inc. reserves the right to change which third party tools are provided in Miniconda.
+
+Cryptography Notice
+===================
+
+This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, us
+e, and/or re-export to another country, of encryption software. BEFORE using any encryption software, please check your country's laws, regulati
+ons and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted. See the Wassenaar
+ Arrangement http://www.wassenaar.org/ for more information.
+
+Anaconda, Inc. has self-classified this software as Export Commodity Control Number (ECCN) 5D992b, which includes mass market information securi
+ty software using or performing cryptographic functions with asymmetric algorithms. No license is required for export of this software to non-em
+bargoed countries. In addition, the Intel(TM) Math Kernel Library contained in Anaconda, Inc.'s software is classified by Intel(TM) as ECCN 5D99
+2b with no license required for export to non-embargoed countries.
+
+The following packages are included in this distribution that relate to cryptography:
+
+openssl
+    The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the
+ Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library.
+
+pycrypto
+    A collection of both secure hash functions (such as SHA256 and RIPEMD160), and various encryption algorithms (AES, DES, RSA, ElGamal, etc.).
+
+pyopenssl
+    A thin Python wrapper around (a subset of) the OpenSSL library.
+
+kerberos (krb5, non-Windows platforms)
+    A network authentication protocol designed to provide strong authentication for client/server applications by using secret-key cryptography.
+
+cryptography
+    A Python library which exposes cryptographic recipes and primitives.
+
+
+Do you accept the license terms? [yes|no]
+[no] >>> 
+Please answer 'yes' or 'no':'
+>>> yes
+
+Miniconda3 will now be installed into this location:
+/home/xzyao/miniconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/home/xzyao/miniconda3] >>> 
+PREFIX=/home/xzyao/miniconda3
+Unpacking payload ...
+Collecting package metadata (current_repodata.json): done                                                 
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/xzyao/miniconda3
+
+  added / updated specs:
+    - _libgcc_mutex==0.1=main
+    - asn1crypto==0.24.0=py37_0
+    - bzip2==1.0.8=h7b6447c_0
+    - ca-certificates==2019.5.15=0
+    - certifi==2019.6.16=py37_0
+    - cffi==1.12.3=py37h2e261b9_0
+    - chardet==3.0.4=py37_1
+    - conda-package-handling==1.3.11=py37_0
+    - conda==4.7.10=py37_0
+    - cryptography==2.7=py37h1ba5d50_0
+    - idna==2.8=py37_0
+    - libarchive==3.3.3=h5d8350f_5
+    - libedit==3.1.20181209=hc058e9b_0
+    - libffi==3.2.1=hd88cf55_4
+    - libgcc-ng==9.1.0=hdf63c60_0
+    - libstdcxx-ng==9.1.0=hdf63c60_0
+    - libxml2==2.9.9=hea5a465_1
+    - lz4-c==1.8.1.2=h14c3975_0
+    - lzo==2.10=h49e0be7_2
+    - ncurses==6.1=he6710b0_1
+    - openssl==1.1.1c=h7b6447c_1
+    - pip==19.1.1=py37_0
+    - pycosat==0.6.3=py37h14c3975_0
+    - pycparser==2.19=py37_0
+    - pyopenssl==19.0.0=py37_0
+    - pysocks==1.7.0=py37_0
+    - python-libarchive-c==2.8=py37_11
+    - python==3.7.3=h0371630_0
+    - readline==7.0=h7b6447c_5
+    - requests==2.22.0=py37_0
+    - ruamel_yaml==0.15.46=py37h14c3975_0
+    - setuptools==41.0.1=py37_0
+    - six==1.12.0=py37_0
+    - sqlite==3.29.0=h7b6447c_0
+    - tk==8.6.8=hbc83047_0
+    - tqdm==4.32.1=py_0
+    - urllib3==1.24.2=py37_0
+    - wheel==0.33.4=py37_0
+    - xz==5.2.4=h14c3975_4
+    - yaml==0.1.7=had09818_2
+    - zlib==1.2.11=h7b6447c_3
+    - zstd==1.3.7=h0b5b093_0
+
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
+  asn1crypto         pkgs/main/linux-64::asn1crypto-0.24.0-py37_0
+  bzip2              pkgs/main/linux-64::bzip2-1.0.8-h7b6447c_0
+  ca-certificates    pkgs/main/linux-64::ca-certificates-2019.5.15-0
+  certifi            pkgs/main/linux-64::certifi-2019.6.16-py37_0
+  cffi               pkgs/main/linux-64::cffi-1.12.3-py37h2e261b9_0
+  chardet            pkgs/main/linux-64::chardet-3.0.4-py37_1
+  conda              pkgs/main/linux-64::conda-4.7.10-py37_0
+  conda-package-han~ pkgs/main/linux-64::conda-package-handling-1.3.11-py37_0
+  cryptography       pkgs/main/linux-64::cryptography-2.7-py37h1ba5d50_0
+  idna               pkgs/main/linux-64::idna-2.8-py37_0
+  libarchive         pkgs/main/linux-64::libarchive-3.3.3-h5d8350f_5
+  libedit            pkgs/main/linux-64::libedit-3.1.20181209-hc058e9b_0
+  libffi             pkgs/main/linux-64::libffi-3.2.1-hd88cf55_4
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
+  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
+  libxml2            pkgs/main/linux-64::libxml2-2.9.9-hea5a465_1
+  lz4-c              pkgs/main/linux-64::lz4-c-1.8.1.2-h14c3975_0
+  lzo                pkgs/main/linux-64::lzo-2.10-h49e0be7_2
+  ncurses            pkgs/main/linux-64::ncurses-6.1-he6710b0_1
+  openssl            pkgs/main/linux-64::openssl-1.1.1c-h7b6447c_1
+  pip                pkgs/main/linux-64::pip-19.1.1-py37_0
+  pycosat            pkgs/main/linux-64::pycosat-0.6.3-py37h14c3975_0
+  pycparser          pkgs/main/linux-64::pycparser-2.19-py37_0
+  pyopenssl          pkgs/main/linux-64::pyopenssl-19.0.0-py37_0
+  pysocks            pkgs/main/linux-64::pysocks-1.7.0-py37_0
+  python             pkgs/main/linux-64::python-3.7.3-h0371630_0
+  python-libarchive~ pkgs/main/linux-64::python-libarchive-c-2.8-py37_11
+  readline           pkgs/main/linux-64::readline-7.0-h7b6447c_5
+  requests           pkgs/main/linux-64::requests-2.22.0-py37_0
+  ruamel_yaml        pkgs/main/linux-64::ruamel_yaml-0.15.46-py37h14c3975_0
+  setuptools         pkgs/main/linux-64::setuptools-41.0.1-py37_0
+  six                pkgs/main/linux-64::six-1.12.0-py37_0
+  sqlite             pkgs/main/linux-64::sqlite-3.29.0-h7b6447c_0
+  tk                 pkgs/main/linux-64::tk-8.6.8-hbc83047_0
+  tqdm               pkgs/main/noarch::tqdm-4.32.1-py_0
+  urllib3            pkgs/main/linux-64::urllib3-1.24.2-py37_0
+  wheel              pkgs/main/linux-64::wheel-0.33.4-py37_0
+  xz                 pkgs/main/linux-64::xz-5.2.4-h14c3975_4
+  yaml               pkgs/main/linux-64::yaml-0.1.7-had09818_2
+  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
+  zstd               pkgs/main/linux-64::zstd-1.3.7-h0b5b093_0
+
+
+Preparing transaction: done
+Executing transaction: / WARNING conda.core.envs_manager:register_env(46): Unable to register environment. Path not writable or missing.
+  environment location: /home/xzyao/miniconda3
+  registry file: /home/xzyao/.conda/environments.txt
+done
+installation finished.
+Do you wish the installer to initialize Miniconda3
+by running conda init? [yes|no]
+[no] >>> yes
+no change     /home/xzyao/miniconda3/condabin/conda
+no change     /home/xzyao/miniconda3/bin/conda
+no change     /home/xzyao/miniconda3/bin/conda-env
+no change     /home/xzyao/miniconda3/bin/activate
+no change     /home/xzyao/miniconda3/bin/deactivate
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.sh
+no change     /home/xzyao/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xzyao/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xzyao/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xzyao/miniconda3/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.csh
+modified      /home/xzyao/.bashrc
+
+==> For changes to take effect, close and re-open your current shell. <==
+
+If you'd prefer that conda's base environment not be activated on startup, 
+   set the auto_activate_base parameter to false: 
+
+conda config --set auto_activate_base false
+
+Thank you for installing Miniconda3!
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ logout
+Connection to spitfire.genomecenter.ucdavis.edu closed.
+localadmins-MacBook-Pro:~ z.xue$ ssh xzyao@spitfire.genomecenter.ucdavis.edu
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.15.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+                                                                           
+                                                       .c:                 
+                                              ..       ol:                 
+   ...                                      . ..,;;,''dxd,                 
+   .';::::;'..                             .;.,;;:l:'okdl:;,'...           
+      ..:oddxxdoc,..                 .';:;:xkxlolodd':l,                   
+          .':c:cccllc:,..      ;x:.'ldddlloxdol,:,dc..''                   
+              .,:xdocccllcc;':do::ldkxxxxxxkcl:::'.                        
+                 .'cddll:,'lxkdxkkO0000000Okdo'                            
+                     .';...,ckOkkkkO0000K000o                              
+                         .;,cxkOkk0K0OOkxxddl'..                           
+                          loc;,loldxxdoc:;;:::clllc:;'...                  
+                         oXOO;       :,.',,;::llcccllloddol:;'..           
+                         :oo'       co;         ...',,;:ldddoooll:;'..     
+                           .;      lxN0o                   .....:,;;;;;'   
+                                     od.                                   
+                                                                           
+                                _ _    __ _          
+          Welcome to  ___ _ __ (_) |_ / _(_)_ __ ___ 
+                     / __| '_ \| | __| |_| | '__/ _ \
+                     \__ \ |_) | | |_|  _| | | |  __/
+                     |___/ .__/|_|\__|_| |_|_|  \___|
+                         |_|                    .genomecenter.ucdavis.edu     
+Last login: Sat Nov  2 23:44:25 2019 from 71.202.96.23
+groups: cannot find name for group ID 1092646859
+Module slurm-17.11.2-lssc0-linux loaded. Commands for scheduling Slurm jobs.
+xzyao@spitfire:~$ conda config --set auto_activate_base false
+-bash: conda: command not found
+xzyao@spitfire:~$ ls 
+microbe_census	miniconda3
+xzyao@spitfire:~$ rm -rf miniconda
+xzyao@spitfire:~$ rm -rf ~/.condarc ~/.conda ~/.continuum
+xzyao@spitfire:~$ cd /share/lemaylab-backedup/Zeya/
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ ls
+miniconda3  Miniconda3-latest-Linux-x86_64.sh  proceesed_data  raw_data  scripts
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ $PATH
+-bash: /software/slurm/17.11.2/lssc0-linux/sbin:/software/slurm/17.11.2/lssc0-linux/bin:/software/modules/1.923/lssc0-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/puppetlabs/bin: No such file or directory
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ export PATH="/share/lemaylab-backedup/Zeya/miniconda3:$PATH"
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ PATH
+-bash: PATH: command not found
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ $PATH
+-bash: /share/lemaylab-backedup/Zeya/miniconda3:/software/slurm/17.11.2/lssc0-linux/sbin:/software/slurm/17.11.2/lssc0-linux/bin:/software/modules/1.923/lssc0-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/puppetlabs/bin: No such file or directory
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ conda info
+-bash: conda: command not found
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ logout
+Connection to spitfire.genomecenter.ucdavis.edu closed.
+localadmins-MacBook-Pro:~ z.xue$ ssh xzyao@spitfire.genomecenter.ucdavis.edu
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.15.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+                                                                           
+                                                       .c:                 
+                                              ..       ol:                 
+   ...                                      . ..,;;,''dxd,                 
+   .';::::;'..                             .;.,;;:l:'okdl:;,'...           
+      ..:oddxxdoc,..                 .';:;:xkxlolodd':l,                   
+          .':c:cccllc:,..      ;x:.'ldddlloxdol,:,dc..''                   
+              .,:xdocccllcc;':do::ldkxxxxxxkcl:::'.                        
+                 .'cddll:,'lxkdxkkO0000000Okdo'                            
+                     .';...,ckOkkkkO0000K000o                              
+                         .;,cxkOkk0K0OOkxxddl'..                           
+                          loc;,loldxxdoc:;;:::clllc:;'...                  
+                         oXOO;       :,.',,;::llcccllloddol:;'..           
+                         :oo'       co;         ...',,;:ldddoooll:;'..     
+                           .;      lxN0o                   .....:,;;;;;'   
+                                     od.                                   
+                                                                           
+                                _ _    __ _          
+          Welcome to  ___ _ __ (_) |_ / _(_)_ __ ___ 
+                     / __| '_ \| | __| |_| | '__/ _ \
+                     \__ \ |_) | | |_|  _| | | |  __/
+                     |___/ .__/|_|\__|_| |_|_|  \___|
+                         |_|                    .genomecenter.ucdavis.edu     
+Last login: Sat Nov  2 23:47:58 2019 from 71.202.96.23
+groups: cannot find name for group ID 1092646863
+Module slurm-17.11.2-lssc0-linux loaded. Commands for scheduling Slurm jobs.
+xzyao@spitfire:~$ rm -rf miniconda3/
+xzyao@spitfire:~$ ls 
+microbe_census
+xzyao@spitfire:~$ bash /share/lemaylab-backedup/Zeya/Miniconda3-latest-Linux-x86_64.sh
+
+Welcome to Miniconda3 4.7.10
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>> 
+===================================
+Miniconda End User License Agreement
+===================================
+
+Copyright 2015, Anaconda, Inc.
+
+All rights reserved under the 3-clause BSD License:
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the docume
+ntation and/or other materials provided with the distribution.
+  * Neither the name of Anaconda, Inc. ("Anaconda, Inc.") nor the names of its contributors may be used to endorse or promote products derived f
+rom this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO
+, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ANACONDA, INC. BE LIABLE FOR 
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS O
+R SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Notice of Third Party Software Licenses
+=======================================
+
+Miniconda contains open source software packages from third parties. These are available on an "as is" basis and subject to their individual lic
+ense agreements. These licenses are available in Anaconda Distribution or at http://docs.anaconda.com/anaconda/pkg-docs. Any binary packages of 
+these third party tools you obtain via Anaconda Distribution are subject to their individual licenses as well as the Anaconda license. Anaconda,
+ Inc. reserves the right to change which third party tools are provided in Miniconda.
+
+Cryptography Notice
+===================
+
+This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, us
+e, and/or re-export to another country, of encryption software. BEFORE using any encryption software, please check your country's laws, regulati
+ons and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted. See the Wassenaar
+ Arrangement http://www.wassenaar.org/ for more information.
+
+Anaconda, Inc. has self-classified this software as Export Commodity Control Number (ECCN) 5D992b, which includes mass market information securi
+ty software using or performing cryptographic functions with asymmetric algorithms. No license is required for export of this software to non-em
+bargoed countries. In addition, the Intel(TM) Math Kernel Library contained in Anaconda, Inc.'s software is classified by Intel(TM) as ECCN 5D99
+2b with no license required for export to non-embargoed countries.
+
+The following packages are included in this distribution that relate to cryptography:
+
+openssl
+    The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the
+ Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library.
+
+pycrypto
+    A collection of both secure hash functions (such as SHA256 and RIPEMD160), and various encryption algorithms (AES, DES, RSA, ElGamal, etc.).
+
+pyopenssl
+    A thin Python wrapper around (a subset of) the OpenSSL library.
+
+kerberos (krb5, non-Windows platforms)
+    A network authentication protocol designed to provide strong authentication for client/server applications by using secret-key cryptography.
+
+cryptography
+    A Python library which exposes cryptographic recipes and primitives.
+
+
+Do you accept the license terms? [yes|no]
+[no] >>> 
+Please answer 'yes' or 'no':'
+>>> yes
+
+Miniconda3 will now be installed into this location:
+/home/xzyao/miniconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/home/xzyao/miniconda3] >>> 
+PREFIX=/home/xzyao/miniconda3
+Unpacking payload ...
+Collecting package metadata (current_repodata.json): done                                                 
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/xzyao/miniconda3
+
+  added / updated specs:
+    - _libgcc_mutex==0.1=main
+    - asn1crypto==0.24.0=py37_0
+    - bzip2==1.0.8=h7b6447c_0
+    - ca-certificates==2019.5.15=0
+    - certifi==2019.6.16=py37_0
+    - cffi==1.12.3=py37h2e261b9_0
+    - chardet==3.0.4=py37_1
+    - conda-package-handling==1.3.11=py37_0
+    - conda==4.7.10=py37_0
+    - cryptography==2.7=py37h1ba5d50_0
+    - idna==2.8=py37_0
+    - libarchive==3.3.3=h5d8350f_5
+    - libedit==3.1.20181209=hc058e9b_0
+    - libffi==3.2.1=hd88cf55_4
+    - libgcc-ng==9.1.0=hdf63c60_0
+    - libstdcxx-ng==9.1.0=hdf63c60_0
+    - libxml2==2.9.9=hea5a465_1
+    - lz4-c==1.8.1.2=h14c3975_0
+    - lzo==2.10=h49e0be7_2
+    - ncurses==6.1=he6710b0_1
+    - openssl==1.1.1c=h7b6447c_1
+    - pip==19.1.1=py37_0
+    - pycosat==0.6.3=py37h14c3975_0
+    - pycparser==2.19=py37_0
+    - pyopenssl==19.0.0=py37_0
+    - pysocks==1.7.0=py37_0
+    - python-libarchive-c==2.8=py37_11
+    - python==3.7.3=h0371630_0
+    - readline==7.0=h7b6447c_5
+    - requests==2.22.0=py37_0
+    - ruamel_yaml==0.15.46=py37h14c3975_0
+    - setuptools==41.0.1=py37_0
+    - six==1.12.0=py37_0
+    - sqlite==3.29.0=h7b6447c_0
+    - tk==8.6.8=hbc83047_0
+    - tqdm==4.32.1=py_0
+    - urllib3==1.24.2=py37_0
+    - wheel==0.33.4=py37_0
+    - xz==5.2.4=h14c3975_4
+    - yaml==0.1.7=had09818_2
+    - zlib==1.2.11=h7b6447c_3
+    - zstd==1.3.7=h0b5b093_0
+
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
+  asn1crypto         pkgs/main/linux-64::asn1crypto-0.24.0-py37_0
+  bzip2              pkgs/main/linux-64::bzip2-1.0.8-h7b6447c_0
+  ca-certificates    pkgs/main/linux-64::ca-certificates-2019.5.15-0
+  certifi            pkgs/main/linux-64::certifi-2019.6.16-py37_0
+  cffi               pkgs/main/linux-64::cffi-1.12.3-py37h2e261b9_0
+  chardet            pkgs/main/linux-64::chardet-3.0.4-py37_1
+  conda              pkgs/main/linux-64::conda-4.7.10-py37_0
+  conda-package-han~ pkgs/main/linux-64::conda-package-handling-1.3.11-py37_0
+  cryptography       pkgs/main/linux-64::cryptography-2.7-py37h1ba5d50_0
+  idna               pkgs/main/linux-64::idna-2.8-py37_0
+  libarchive         pkgs/main/linux-64::libarchive-3.3.3-h5d8350f_5
+  libedit            pkgs/main/linux-64::libedit-3.1.20181209-hc058e9b_0
+  libffi             pkgs/main/linux-64::libffi-3.2.1-hd88cf55_4
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
+  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
+  libxml2            pkgs/main/linux-64::libxml2-2.9.9-hea5a465_1
+  lz4-c              pkgs/main/linux-64::lz4-c-1.8.1.2-h14c3975_0
+  lzo                pkgs/main/linux-64::lzo-2.10-h49e0be7_2
+  ncurses            pkgs/main/linux-64::ncurses-6.1-he6710b0_1
+  openssl            pkgs/main/linux-64::openssl-1.1.1c-h7b6447c_1
+  pip                pkgs/main/linux-64::pip-19.1.1-py37_0
+  pycosat            pkgs/main/linux-64::pycosat-0.6.3-py37h14c3975_0
+  pycparser          pkgs/main/linux-64::pycparser-2.19-py37_0
+  pyopenssl          pkgs/main/linux-64::pyopenssl-19.0.0-py37_0
+  pysocks            pkgs/main/linux-64::pysocks-1.7.0-py37_0
+  python             pkgs/main/linux-64::python-3.7.3-h0371630_0
+  python-libarchive~ pkgs/main/linux-64::python-libarchive-c-2.8-py37_11
+  readline           pkgs/main/linux-64::readline-7.0-h7b6447c_5
+  requests           pkgs/main/linux-64::requests-2.22.0-py37_0
+  ruamel_yaml        pkgs/main/linux-64::ruamel_yaml-0.15.46-py37h14c3975_0
+  setuptools         pkgs/main/linux-64::setuptools-41.0.1-py37_0
+  six                pkgs/main/linux-64::six-1.12.0-py37_0
+  sqlite             pkgs/main/linux-64::sqlite-3.29.0-h7b6447c_0
+  tk                 pkgs/main/linux-64::tk-8.6.8-hbc83047_0
+  tqdm               pkgs/main/noarch::tqdm-4.32.1-py_0
+  urllib3            pkgs/main/linux-64::urllib3-1.24.2-py37_0
+  wheel              pkgs/main/linux-64::wheel-0.33.4-py37_0
+  xz                 pkgs/main/linux-64::xz-5.2.4-h14c3975_4
+  yaml               pkgs/main/linux-64::yaml-0.1.7-had09818_2
+  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
+  zstd               pkgs/main/linux-64::zstd-1.3.7-h0b5b093_0
+
+
+Preparing transaction: done
+Executing transaction: | WARNING conda.core.envs_manager:register_env(46): Unable to register environment. Path not writable or missing.
+  environment location: /home/xzyao/miniconda3
+  registry file: /home/xzyao/.conda/environments.txt
+done
+installation finished.
+Do you wish the installer to initialize Miniconda3
+by running conda init? [yes|no]
+[no] >>> yes
+no change     /home/xzyao/miniconda3/condabin/conda
+no change     /home/xzyao/miniconda3/bin/conda
+no change     /home/xzyao/miniconda3/bin/conda-env
+no change     /home/xzyao/miniconda3/bin/activate
+no change     /home/xzyao/miniconda3/bin/deactivate
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.sh
+no change     /home/xzyao/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xzyao/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xzyao/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xzyao/miniconda3/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.csh
+no change     /home/xzyao/.bashrc
+No action taken.
+If you'd prefer that conda's base environment not be activated on startup, 
+   set the auto_activate_base parameter to false: 
+
+conda config --set auto_activate_base false
+
+Thank you for installing Miniconda3!
+xzyao@spitfire:~$ conda info
+-bash: conda: command not found
+xzyao@spitfire:~$ nano .bashrc
+xzyao@spitfire:~$ export PATH="/home/xzyao/miniconda3/bin:$PATH"
+xzyao@spitfire:~$ conda info
+
+     active environment : None
+       user config file : /home/xzyao/.condarc
+ populated config files : 
+          conda version : 4.7.10
+    conda-build version : not installed
+         python version : 3.7.3.final.0
+       virtual packages : 
+       base environment : /home/xzyao/miniconda3  (writable)
+           channel URLs : https://repo.anaconda.com/pkgs/main/linux-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/linux-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+          package cache : /home/xzyao/miniconda3/pkgs
+                          /home/xzyao/.conda/pkgs
+       envs directories : /home/xzyao/miniconda3/envs
+                          /home/xzyao/.conda/envs
+               platform : linux-64
+             user-agent : conda/4.7.10 requests/2.22.0 CPython/3.7.3 Linux/4.15.0-42-generic ubuntu/16.04.5 glibc/2.23
+                UID:GID : 22621:22621
+             netrc file : None
+           offline mode : False
+
+xzyao@spitfire:~$ logout
+Connection to spitfire.genomecenter.ucdavis.edu closed.
+localadmins-MacBook-Pro:~ z.xue$ ssh xzyao@spitfire.genomecenter.ucdavis.edu
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.15.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+                                                                           
+                                                       .c:                 
+                                              ..       ol:                 
+   ...                                      . ..,;;,''dxd,                 
+   .';::::;'..                             .;.,;;:l:'okdl:;,'...           
+      ..:oddxxdoc,..                 .';:;:xkxlolodd':l,                   
+          .':c:cccllc:,..      ;x:.'ldddlloxdol,:,dc..''                   
+              .,:xdocccllcc;':do::ldkxxxxxxkcl:::'.                        
+                 .'cddll:,'lxkdxkkO0000000Okdo'                            
+                     .';...,ckOkkkkO0000K000o                              
+                         .;,cxkOkk0K0OOkxxddl'..                           
+                          loc;,loldxxdoc:;;:::clllc:;'...                  
+                         oXOO;       :,.',,;::llcccllloddol:;'..           
+                         :oo'       co;         ...',,;:ldddoooll:;'..     
+                           .;      lxN0o                   .....:,;;;;;'   
+                                     od.                                   
+                                                                           
+                                _ _    __ _          
+          Welcome to  ___ _ __ (_) |_ / _(_)_ __ ___ 
+                     / __| '_ \| | __| |_| | '__/ _ \
+                     \__ \ |_) | | |_|  _| | | |  __/
+                     |___/ .__/|_|\__|_| |_|_|  \___|
+                         |_|                    .genomecenter.ucdavis.edu     
+Last login: Sat Nov  2 23:50:29 2019 from 71.202.96.23
+groups: cannot find name for group ID 1092646865
+Module slurm-17.11.2-lssc0-linux loaded. Commands for scheduling Slurm jobs.
+xzyao@spitfire:~$ conda info
+-bash: conda: command not found
+xzyao@spitfire:~$ export PATH="/home/xzyao/miniconda3/bin:$PATH"
+xzyao@spitfire:~$ conda info
+
+     active environment : None
+       user config file : /home/xzyao/.condarc
+ populated config files : 
+          conda version : 4.7.10
+    conda-build version : not installed
+         python version : 3.7.3.final.0
+       virtual packages : 
+       base environment : /home/xzyao/miniconda3  (writable)
+           channel URLs : https://repo.anaconda.com/pkgs/main/linux-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/linux-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+          package cache : /home/xzyao/miniconda3/pkgs
+                          /home/xzyao/.conda/pkgs
+       envs directories : /home/xzyao/miniconda3/envs
+                          /home/xzyao/.conda/envs
+               platform : linux-64
+             user-agent : conda/4.7.10 requests/2.22.0 CPython/3.7.3 Linux/4.15.0-42-generic ubuntu/16.04.5 glibc/2.23
+                UID:GID : 22621:22621
+             netrc file : None
+           offline mode : False
+
+xzyao@spitfire:~$ rm -rf 
+.bash_history   .cache/         .lesshst        microbe_census/ .nano/          .vim/           .wget-hsts      
+.bashrc         .gitconfig      .local/         miniconda3/     .ssh/           .viminfo        
+xzyao@spitfire:~$ rm -rf /share/lemaylab-backedup/Zeya/miniconda3/
+xzyao@spitfire:~$ python -V
+Python 3.7.3
+xzyao@spitfire:~$ conda deactivate
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+xzyao@spitfire:~$ conda init bash
+no change     /home/xzyao/miniconda3/condabin/conda
+no change     /home/xzyao/miniconda3/bin/conda
+no change     /home/xzyao/miniconda3/bin/conda-env
+no change     /home/xzyao/miniconda3/bin/activate
+no change     /home/xzyao/miniconda3/bin/deactivate
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.sh
+no change     /home/xzyao/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xzyao/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xzyao/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xzyao/miniconda3/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.csh
+no change     /home/xzyao/.bashrc
+No action taken.
+xzyao@spitfire:~$ conda deactivate
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+xzyao@spitfire:~$ ls miniconda3/
+bin		 condabin    envs  include  libexec	 man   share  ssl
+compiler_compat  conda-meta  etc   lib	    LICENSE.txt  pkgs  shell  x86_64-conda_cos6-linux-gnu
+xzyao@spitfire:~$ ls miniconda3/envs/
+xzyao@spitfire:~$ conda create --name ARG-py37 python=3.7
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.7.10
+  latest version: 4.7.12
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+## Package Plan ##
+
+  environment location: /home/xzyao/miniconda3/envs/ARG-py37
+
+  added / updated specs:
+    - python=3.7
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    ca-certificates-2019.10.16 |                0         131 KB
+    certifi-2019.9.11          |           py37_0         154 KB
+    openssl-1.1.1d             |       h7b6447c_3         3.7 MB
+    pip-19.3.1                 |           py37_0         1.9 MB
+    python-3.7.5               |       h0371630_0        32.2 MB
+    setuptools-41.6.0          |           py37_0         652 KB
+    sqlite-3.30.1              |       h7b6447c_0         1.9 MB
+    wheel-0.33.6               |           py37_0          40 KB
+    ------------------------------------------------------------
+                                           Total:        40.7 MB
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
+  ca-certificates    pkgs/main/linux-64::ca-certificates-2019.10.16-0
+  certifi            pkgs/main/linux-64::certifi-2019.9.11-py37_0
+  libedit            pkgs/main/linux-64::libedit-3.1.20181209-hc058e9b_0
+  libffi             pkgs/main/linux-64::libffi-3.2.1-hd88cf55_4
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
+  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
+  ncurses            pkgs/main/linux-64::ncurses-6.1-he6710b0_1
+  openssl            pkgs/main/linux-64::openssl-1.1.1d-h7b6447c_3
+  pip                pkgs/main/linux-64::pip-19.3.1-py37_0
+  python             pkgs/main/linux-64::python-3.7.5-h0371630_0
+  readline           pkgs/main/linux-64::readline-7.0-h7b6447c_5
+  setuptools         pkgs/main/linux-64::setuptools-41.6.0-py37_0
+  sqlite             pkgs/main/linux-64::sqlite-3.30.1-h7b6447c_0
+  tk                 pkgs/main/linux-64::tk-8.6.8-hbc83047_0
+  wheel              pkgs/main/linux-64::wheel-0.33.6-py37_0
+  xz                 pkgs/main/linux-64::xz-5.2.4-h14c3975_4
+  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+sqlite-3.30.1        | 1.9 MB    | ##################################################################################################### | 100% 
+python-3.7.5         | 32.2 MB   | ##################################################################################################### | 100% 
+openssl-1.1.1d       | 3.7 MB    | ##################################################################################################### | 100% 
+certifi-2019.9.11    | 154 KB    | ##################################################################################################### | 100% 
+wheel-0.33.6         | 40 KB     | ##################################################################################################### | 100% 
+setuptools-41.6.0    | 652 KB    | ##################################################################################################### | 100% 
+ca-certificates-2019 | 131 KB    | ##################################################################################################### | 100% 
+pip-19.3.1           | 1.9 MB    | ##################################################################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate ARG-py37
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+xzyao@spitfire:~$ conda activate ARG-py37
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+xzyao@spitfire:~$ conda init bash 
+no change     /home/xzyao/miniconda3/condabin/conda
+no change     /home/xzyao/miniconda3/bin/conda
+no change     /home/xzyao/miniconda3/bin/conda-env
+no change     /home/xzyao/miniconda3/bin/activate
+no change     /home/xzyao/miniconda3/bin/deactivate
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.sh
+no change     /home/xzyao/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xzyao/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xzyao/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xzyao/miniconda3/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.csh
+no change     /home/xzyao/.bashrc
+No action taken.
+xzyao@spitfire:~$ less /home/xzyao/miniconda3/bin/activate
+xzyao@spitfire:~$ cd /share/lemaylab-backedup/Zeya/
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ ls
+Miniconda3-latest-Linux-x86_64.sh  proceesed_data  raw_data  scripts
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ conda info
+
+     active environment : None
+       user config file : /home/xzyao/.condarc
+ populated config files : 
+          conda version : 4.7.10
+    conda-build version : not installed
+         python version : 3.7.3.final.0
+       virtual packages : 
+       base environment : /home/xzyao/miniconda3  (writable)
+           channel URLs : https://repo.anaconda.com/pkgs/main/linux-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/linux-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+          package cache : /home/xzyao/miniconda3/pkgs
+                          /home/xzyao/.conda/pkgs
+       envs directories : /home/xzyao/miniconda3/envs
+                          /home/xzyao/.conda/envs
+               platform : linux-64
+             user-agent : conda/4.7.10 requests/2.22.0 CPython/3.7.3 Linux/4.15.0-42-generic ubuntu/16.04.5 glibc/2.23
+                UID:GID : 22621:22621
+             netrc file : None
+           offline mode : False
+
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ conda activate ARG-py37                           
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ conda init bash 
+no change     /home/xzyao/miniconda3/condabin/conda
+no change     /home/xzyao/miniconda3/bin/conda
+no change     /home/xzyao/miniconda3/bin/conda-env
+no change     /home/xzyao/miniconda3/bin/activate
+no change     /home/xzyao/miniconda3/bin/deactivate
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.sh
+no change     /home/xzyao/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xzyao/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xzyao/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xzyao/miniconda3/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /home/xzyao/miniconda3/etc/profile.d/conda.csh
+no change     /home/xzyao/.bashrc
+No action taken.
+xzyao@spitfire:/share/lemaylab-backedup/Zeya$ logout
+Connection to spitfire.genomecenter.ucdavis.edu closed.
+localadmins-MacBook-Pro:~ z.xue$ ssh xzyao@spitfire.genomecenter.ucdavis.edu
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Permission denied, please try again.
+xzyao@spitfire.genomecenter.ucdavis.edu's password: 
+Welcome to Ubuntu 16.04.5 LTS (GNU/Linux 4.15.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+                                                                           
+                                                       .c:                 
+                                              ..       ol:                 
+   ...                                      . ..,;;,''dxd,                 
+   .';::::;'..                             .;.,;;:l:'okdl:;,'...           
+      ..:oddxxdoc,..                 .';:;:xkxlolodd':l,                   
+          .':c:cccllc:,..      ;x:.'ldddlloxdol,:,dc..''                   
+              .,:xdocccllcc;':do::ldkxxxxxxkcl:::'.                        
+                 .'cddll:,'lxkdxkkO0000000Okdo'                            
+                     .';...,ckOkkkkO0000K000o                              
+                         .;,cxkOkk0K0OOkxxddl'..                           
+                          loc;,loldxxdoc:;;:::clllc:;'...                  
+                         oXOO;       :,.',,;::llcccllloddol:;'..           
+                         :oo'       co;         ...',,;:ldddoooll:;'..     
+                           .;      lxN0o                   .....:,;;;;;'   
+                                     od.                                   
+                                                                           
+                                _ _    __ _          
+          Welcome to  ___ _ __ (_) |_ / _(_)_ __ ___ 
+                     / __| '_ \| | __| |_| | '__/ _ \
+                     \__ \ |_) | | |_|  _| | | |  __/
+                     |___/ .__/|_|\__|_| |_|_|  \___|
+                         |_|                    .genomecenter.ucdavis.edu     
+Last login: Sat Nov  2 23:53:35 2019 from 71.202.96.23
+groups: cannot find name for group ID 1092646875
+Module slurm-17.11.2-lssc0-linux loaded. Commands for scheduling Slurm jobs.
+xzyao@spitfire:~$ conda info
+-bash: conda: command not found
+xzyao@spitfire:~$ export PATH="/home/xzyao/miniconda3/bin:$PATH"
+xzyao@spitfire:~$ conda info
+
+     active environment : None
+       user config file : /home/xzyao/.condarc
+ populated config files : 
+          conda version : 4.7.10
+    conda-build version : not installed
+         python version : 3.7.3.final.0
+       virtual packages : 
+       base environment : /home/xzyao/miniconda3  (writable)
+           channel URLs : https://repo.anaconda.com/pkgs/main/linux-64
+                          https://repo.anaconda.com/pkgs/main/noarch
+                          https://repo.anaconda.com/pkgs/r/linux-64
+                          https://repo.anaconda.com/pkgs/r/noarch
+          package cache : /home/xzyao/miniconda3/pkgs
+                          /home/xzyao/.conda/pkgs
+       envs directories : /home/xzyao/miniconda3/envs
+                          /home/xzyao/.conda/envs
+               platform : linux-64
+             user-agent : conda/4.7.10 requests/2.22.0 CPython/3.7.3 Linux/4.15.0-42-generic ubuntu/16.04.5 glibc/2.23
+                UID:GID : 22621:22621
+             netrc file : None
+           offline mode : False
+
+xzyao@spitfire:~$ conda activate ARG-py37
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+xzyao@spitfire:~$ source activate ARG-py37
+(ARG-py37) xzyao@spitfire:~$ python -V
+Python 3.7.5
+(ARG-py37) xzyao@spitfire:~$ source deactivate 
+DeprecationWarning: 'source deactivate' is deprecated. Use 'conda deactivate'.
+xzyao@spitfire:~$ python -V
+Python 3.7.3
+xzyao@spitfire:~$ 
