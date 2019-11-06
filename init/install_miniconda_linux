@@ -1366,3 +1366,197 @@ DeprecationWarning: 'source deactivate' is deprecated. Use 'conda deactivate'.
 xzyao@spitfire:~$ python -V
 Python 3.7.3
 xzyao@spitfire:~$ 
+
+(ARG-py37) xzyao@spitfire:~$ conda install -c anaconda numpy
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.7.10
+  latest version: 4.7.12
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+## Package Plan ##
+
+  environment location: /home/xzyao/miniconda3/envs/ARG-py37
+
+  added / updated specs:
+    - numpy
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    blas-1.0                   |              mkl           6 KB  anaconda
+    ca-certificates-2019.10.16 |                0         131 KB  anaconda
+    certifi-2019.9.11          |           py37_0         154 KB  anaconda
+    intel-openmp-2019.5        |              281         895 KB  anaconda
+    libgfortran-ng-7.3.0       |       hdf63c60_0         1.3 MB  anaconda
+    mkl-2019.5                 |              281       205.3 MB  anaconda
+    mkl-service-2.3.0          |   py37he904b0f_0         208 KB  anaconda
+    mkl_fft-1.0.14             |   py37ha843d7b_0         172 KB  anaconda
+    mkl_random-1.1.0           |   py37hd6b4f25_0         376 KB  anaconda
+    numpy-1.17.2               |   py37haad9e8e_0           4 KB  anaconda
+    numpy-base-1.17.2          |   py37hde5b4d6_0         5.3 MB  anaconda
+    openssl-1.1.1              |       h7b6447c_0         5.0 MB  anaconda
+    six-1.12.0                 |           py37_0          22 KB  anaconda
+    ------------------------------------------------------------
+                                           Total:       218.8 MB
+
+The following NEW packages will be INSTALLED:
+
+  blas               anaconda/linux-64::blas-1.0-mkl
+  intel-openmp       anaconda/linux-64::intel-openmp-2019.5-281
+  libgfortran-ng     anaconda/linux-64::libgfortran-ng-7.3.0-hdf63c60_0
+  mkl                anaconda/linux-64::mkl-2019.5-281
+  mkl-service        anaconda/linux-64::mkl-service-2.3.0-py37he904b0f_0
+  mkl_fft            anaconda/linux-64::mkl_fft-1.0.14-py37ha843d7b_0
+  mkl_random         anaconda/linux-64::mkl_random-1.1.0-py37hd6b4f25_0
+  numpy              anaconda/linux-64::numpy-1.17.2-py37haad9e8e_0
+  numpy-base         anaconda/linux-64::numpy-base-1.17.2-py37hde5b4d6_0
+  six                anaconda/linux-64::six-1.12.0-py37_0
+
+The following packages will be UPDATED:
+
+  openssl              pkgs/main::openssl-1.1.1d-h7b6447c_3 --> anaconda::openssl-1.1.1-h7b6447c_0
+
+The following packages will be SUPERSEDED by a higher-priority channel:
+
+  ca-certificates                                 pkgs/main --> anaconda
+  certifi                                         pkgs/main --> anaconda
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+numpy-1.17.2         | 4 KB      | ###################################################################################### | 100% 
+numpy-base-1.17.2    | 5.3 MB    | ###################################################################################### | 100% 
+ca-certificates-2019 | 131 KB    | ###################################################################################### | 100% 
+certifi-2019.9.11    | 154 KB    | ###################################################################################### | 100% 
+mkl_fft-1.0.14       | 172 KB    | ###################################################################################### | 100% 
+blas-1.0             | 6 KB      | ###################################################################################### | 100% 
+mkl_random-1.1.0     | 376 KB    | ###################################################################################### | 100% 
+six-1.12.0           | 22 KB     | ###################################################################################### | 100% 
+mkl-service-2.3.0    | 208 KB    | ###################################################################################### | 100% 
+mkl-2019.5           | 205.3 MB  | ###################################################################################### | 100% 
+intel-openmp-2019.5  | 895 KB    | ###################################################################################### | 100% 
+libgfortran-ng-7.3.0 | 1.3 MB    | ###################################################################################### | 100% 
+openssl-1.1.1        | 5.0 MB    | ###################################################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+
+(ARG-py37) xzyao@spitfire:/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/tests$ conda install -c anaconda biopython
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.7.10
+  latest version: 4.7.12
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+## Package Plan ##
+
+  environment location: /home/xzyao/miniconda3/envs/ARG-py37
+
+  added / updated specs:
+    - biopython
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    biopython-1.74             |   py37h7b6447c_0         2.5 MB  anaconda
+    ------------------------------------------------------------
+                                           Total:         2.5 MB
+
+The following NEW packages will be INSTALLED:
+
+  biopython          anaconda/linux-64::biopython-1.74-py37h7b6447c_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+biopython-1.74       | 2.5 MB    | ###################################################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+
+
+(ARG-py37) xzyao@spitfire:/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome$ conda install pandas
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.7.10
+  latest version: 4.7.12
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+## Package Plan ##
+
+  environment location: /home/xzyao/miniconda3/envs/ARG-py37
+
+  added / updated specs:
+    - pandas
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    ca-certificates-2019.10.16 |                0         131 KB
+    certifi-2019.9.11          |           py37_0         154 KB
+    pandas-0.25.2              |   py37he6710b0_0        11.4 MB
+    python-dateutil-2.8.0      |           py37_0         266 KB
+    pytz-2019.3                |             py_0         231 KB
+    ------------------------------------------------------------
+                                           Total:        12.2 MB
+
+The following NEW packages will be INSTALLED:
+
+  pandas             pkgs/main/linux-64::pandas-0.25.2-py37he6710b0_0
+  python-dateutil    pkgs/main/linux-64::python-dateutil-2.8.0-py37_0
+  pytz               pkgs/main/noarch::pytz-2019.3-py_0
+
+The following packages will be SUPERSEDED by a higher-priority channel:
+
+  ca-certificates                                  anaconda --> pkgs/main
+  certifi                                          anaconda --> pkgs/main
+  openssl                anaconda::openssl-1.1.1-h7b6447c_0 --> pkgs/main::openssl-1.1.1d-h7b6447c_3
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+ca-certificates-2019 | 131 KB    | ###################################################################################### | 100% 
+certifi-2019.9.11    | 154 KB    | ###################################################################################### | 100% 
+pytz-2019.3          | 231 KB    | ###################################################################################### | 100% 
+pandas-0.25.2        | 11.4 MB   | ###################################################################################### | 100% 
+python-dateutil-2.8. | 266 KB    | ###################################################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
