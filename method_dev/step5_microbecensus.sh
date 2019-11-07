@@ -6,8 +6,11 @@
 #SBATCH --time=5-00:00:00
 #SBATCH --mem=500GB
 
-# MicrobeCensus location
-mc_location=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/run_microbe_census.py 
+
+export PATH="/home/xzyao/miniconda3/bin:$PATH"
+source activate ARG-py37
+
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 
 
 ####################################################################
@@ -17,21 +20,30 @@ mc_location=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microb
 
 echo "NOW STARTING NORMALIZATION WITH MicrobeCensus AT: "; date
 
-output_dir_flash=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step2-4_trim_fastuniq_flash/step4_flash
-#mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MC_test
-output_dir_mc=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MC_test
+## Set input and output file paths
+#
+dup_outdir=$run_dir/step3_fastuniq
+mc_outdir=$run_dir/step5_MicrobeCensus
 
-# change dir for writing temporary files
-export TMPDIR=$output_dir_mc
-# Add the numpy path to $PATH
-export PATH="/home/xzyao/.local/bin:$PATH"
+# MicrobeCensus location
+microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts/run_microbe_census.py
+
+
 
 # Take output from step4 flash of the step2-4_trim_fastuniq_flash workflow
-for file in $output_dir_flash/*..extendedFrags.fastq
+for file in $dup_outdir/*_R1_dup.fastq
 do
-	STEM=$(basename "${file}" ..extendedFrags.fastq)
+	echo "Processing sample $file now"
+
+	export PATH="/home/xzyao/miniconda3/bin:$PATH"
+	source activate ARG-py37
+	# change dir for writing temporary files
+	export TMPDIR=$mc_outdir
+
+	STEM=$(basename "$file" _R1_dup.fastq)
+	file2=$dup_outdir/${STEM}_R2_dup.fastq
 
 	# -h for help
 	# -t thread number
-	$mc_location $file $output_dir_mc/${STEM}_mc.txt -t 15
+	$microbecensus $file,$file2 $mc_outdir/${STEM}_mc.txt 
 done
