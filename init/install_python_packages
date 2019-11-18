@@ -1,5 +1,12 @@
 # on spitfire 
 
+# install numpy package to specific location from source
+wget https://sourceforge.net/projects/numpy/files/NumPy/1.11.2/numpy-1.11.2.tar.gz/download
+tar xfz download 
+cd numpy-1.11.2/
+python setup.py install
+### Doesn't work because I don't have developer's header
+
 # Add the installed directory to PATH (otherwise pip will not work)
 export PATH="/home/xzyao/.local/bin:$PATH" # replace xzyao with your userid
 
