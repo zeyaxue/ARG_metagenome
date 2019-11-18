@@ -103,7 +103,7 @@ def merge_normtab(mergeout=None, *args):
 	try:
 		tabm=pd.DataFrame() # initialize with an empty dataframe as merged table
 		for file in args:
-			tab = pd.read_csv(file, sep='\t', header=0)
+			tab = pd.read_csv(file, sep=',', header=0)
 			try:
 				tabm = pd.merge(tab, tabm, how='outer', on = ['MEGID','Class','Mechanism','Group','Gene'])
 				tabm.fillna(0, inplace=True) # replace nan from merging by 0
