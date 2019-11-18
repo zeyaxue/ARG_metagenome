@@ -1,14 +1,8 @@
 #!/bin/bash
-#SBATCH --mail-user=zhxue@ucdavis.edu
-#SBATCH --mail-type=ALL
-#SBATCH --job-name=MicrobeCensus
-#SBATCH --error=MC.err
-#SBATCH --time=5-00:00:00
-#SBATCH --mem=500GB
-
 
 export PATH="/home/xzyao/miniconda3/bin:$PATH"
 source activate ARG-py37
+export PATH="/home/xzyao/.local/bin:$PATH"
 
 run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 
@@ -21,29 +15,41 @@ run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 echo "NOW STARTING NORMALIZATION WITH MicrobeCensus AT: "; date
 
 ## Set input and output file paths
-#
 dup_outdir=$run_dir/step3_fastuniq
+mkdir $run_dir/step5_MicrobeCensus
 mc_outdir=$run_dir/step5_MicrobeCensus
 
 # MicrobeCensus location
-microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts/run_microbe_census.py
+microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts/run_microbe_census_nomodule.py
+# External RAPsearch2 v2.15 binary. I would like to have the binary NOT in the xzyao/.local home directory
+# because the home directory gets wiped clean every time I log out?
+RAPSEARCH=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/rapsearch_Linux_2.15
 
-
-
-# Take output from step4 flash of the step2-4_trim_fastuniq_flash workflow
 for file in $dup_outdir/*_R1_dup.fastq
 do
-	echo "Processing sample $file now"
-
-	export PATH="/home/xzyao/miniconda3/bin:$PATH"
-	source activate ARG-py37
-	# change dir for writing temporary files
-	export TMPDIR=$mc_outdir
-
 	STEM=$(basename "$file" _R1_dup.fastq)
-	file2=$dup_outdir/${STEM}_R2_dup.fastq
 
-	# -h for help
-	# -t thread number
-	$microbecensus $file,$file2 $mc_outdir/${STEM}_mc.txt 
+	if [ -f $mc_outdir/${STEM}_allreads_mc.txt ]
+	then
+		echo "$file exist"
+	else 
+		echo "Processing sample $file now" 
+	
+		export PATH="/home/xzyao/miniconda3/bin:$PATH"
+		source activate ARG-py37
+		export PATH="/home/xzyao/.local/bin:$PATH"
+		# change dir for writing temporary files
+		export TMPDIR=$mc_outdir
+		
+		file2=$dup_outdir/${STEM}_R2_dup.fastq
+	
+		# -h for help
+		# -l read length to cut at, should be 150 for Novaseq paired end samples
+		# -t thread number for rapsearch, microbecensus only uses 1 thread
+		# -n number of reads to sample from seqfile and use for AGS estimation 
+		## set at 77 million reads to use all reads (77 million reads = F + R)
+		$microbecensus $file,$file2 $mc_outdir/${STEM}_allreads_mc.txt \
+		-r $RAPSEARCH \
+		-l 150 -t 20 -n 77000000 #change per run 
+	fi
 done
