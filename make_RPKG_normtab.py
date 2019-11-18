@@ -93,7 +93,7 @@ def make_RPKG_normtab(mcfp=None, lenfp=None, countfp=None, outfp=None):
 
 	# 5 # Write out the final table
 	try: 
-		normtab_fin.to_csv(outfp, sep='\t') 
+		normtab_fin.to_csv(outfp, sep=',') 
 	except (TypeError, UnboundLocalError):
 		pass	
 
@@ -109,7 +109,7 @@ def merge_normtab(mergeout=None, *args):
 				tabm.fillna(0, inplace=True) # replace nan from merging by 0
 			except KeyError:
 				tabm = tab.copy() # the first loop when tabm is an empty df
-		tabm.to_csv(mergeout, sep='\t')	
+		tabm.to_csv(mergeout, sep=',')	
 	except ValueError: 
 		pass	# in python 2, this won't work...*args still requires input
 
