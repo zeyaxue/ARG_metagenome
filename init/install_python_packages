@@ -1,6 +1,9 @@
 # on spitfire 
 
 # install numpy package to specific location from source
+pip install numpy -t /share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts
+# This method worked 
+
 wget https://sourceforge.net/projects/numpy/files/NumPy/1.11.2/numpy-1.11.2.tar.gz/download
 tar xfz download 
 cd numpy-1.11.2/
