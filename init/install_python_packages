@@ -22,3 +22,5 @@ pip install cogent --user
 # install pandas
 export PATH="/home/xzyao/miniconda3/bin:$PATH"
 pip install pandas --user
+### install pandas for inside the "/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome"
+pip install pandas -t ./
