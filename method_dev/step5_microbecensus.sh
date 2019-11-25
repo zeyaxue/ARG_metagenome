@@ -1,9 +1,5 @@
 #!/bin/bash
 
-export PATH="/home/xzyao/miniconda3/bin:$PATH"
-source activate ARG-py37
-export PATH="/home/xzyao/.local/bin:$PATH"
-
 run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 
 
@@ -18,6 +14,7 @@ echo "NOW STARTING NORMALIZATION WITH MicrobeCensus AT: "; date
 dup_outdir=$run_dir/step3_fastuniq
 mkdir $run_dir/step5_MicrobeCensus
 mc_outdir=$run_dir/step5_MicrobeCensus
+ 
 
 # MicrobeCensus location
 microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts/run_microbe_census_nomodule.py
@@ -25,7 +22,7 @@ microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scri
 # because the home directory gets wiped clean every time I log out?
 RAPSEARCH=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/rapsearch_Linux_2.15
 
-for file in $dup_outdir/*_R1_dup.fastq
+for file in $dup_outdir/8*_R1_dup.fastq
 do
 	STEM=$(basename "$file" _R1_dup.fastq)
 
@@ -36,13 +33,12 @@ do
 		echo "Processing sample $file now" 
 	
 		export PATH="/home/xzyao/miniconda3/bin:$PATH"
-		source activate ARG-py37
 		export PATH="/home/xzyao/.local/bin:$PATH"
 		# change dir for writing temporary files
 		export TMPDIR=$mc_outdir
 		
 		file2=$dup_outdir/${STEM}_R2_dup.fastq
-	
+
 		# -h for help
 		# -l read length to cut at, should be 150 for Novaseq paired end samples
 		# -t thread number for rapsearch, microbecensus only uses 1 thread
