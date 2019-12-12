@@ -69,4 +69,5 @@ python $norm \
 	--mergein $norm_outdir/*_norm.csv # 
 
 
+echo "STEP 7 DONE AT: "; date
 
