@@ -31,16 +31,18 @@ do
 	
 		# convert sam file to fastq and keep only reads that are mapped
 		# usage: https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/reformat-guide/
-		#$bbmap/reformat.sh in=$file out=$aln_outdir/mapped_fastq/${STEM}_megares_map.fastq mappedonly
+		$bbmap/reformat.sh in=$file out=$aln_outdir/mapped_fastq/${STEM}_megares_map.fastq mappedonly
+		# get the sequence headers that are mapped to megares db (needed for step 10)
+		$bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
 	
 		# use bwa to index and align contigs with short reads containing ARGs
-		#$bwa index $megahit_outdir/${STEM}_assembled/final.contigs.fa
-		#$bwa mem -t 15 $megahit_outdir/${STEM}_assembled/final.contigs.fa $aln_outdir/mapped_fastq/${STEM}_megares_map.fastq > $aln_outdir/${STEM}_contig_aln.sam
+		$bwa index $megahit_outdir/${STEM}_assembled/final.contigs.fa
+		$bwa mem -t 15 $megahit_outdir/${STEM}_assembled/final.contigs.fa $aln_outdir/mapped_fastq/${STEM}_megares_map.fastq > $aln_outdir/${STEM}_contig_aln.sam
 	
 		# get the contigs header containing ARG 
-		#$bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
+		$bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
 		# change A0 based on run header & # add a space after each line for the 1st filed of the actual contig header
-		#grep 'A0' $aln_outdir/${STEM}_contig_aln_maponly.sam | cut -f 3 > ${STEM}_header.txt
+		grep 'A0' $aln_outdir/${STEM}_contig_aln_maponly.sam | cut -f 3 > ${STEM}_header.txt
 		python $pyhd --i ${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
 	
 		$bbmap/filterbyname.sh in=$megahit_outdir/${STEM}_assembled/final.contigs.fa \
