@@ -17,6 +17,6 @@ for file in $output_dir_flash/*.extendedFrags.fastq
 do
 	STEM=$(basename "$file" .extendedFrags.fastq)
 
-	$diamond_location blastx --db $db -q $file -a $output_dir_diamond/${STEM}_${STEM_db}.daa -t ./ -k 1 --sensitive --evalue 1e-10
-	$diamond_location view --daa $output_dir_diamond/${STEM}_${STEM_db}.daa -o $output_dir_diamond/${STEM}_${STEM_db}.txt -f tab	
+	$diamond_location blastx --db $db -q $file -a $output_dir_diamond/${STEM}.daa -t ./ -k 1 --sensitive --evalue 1e-10
+	$diamond_location view --daa $output_dir_diamond/${STEM}.daa -o $output_dir_diamond/${STEM}.txt -f tab	
 done
