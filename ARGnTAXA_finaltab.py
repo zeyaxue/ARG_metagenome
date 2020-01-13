@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 '''This script generates the "final" output file of the ARG workflow. It combines output from three different intermediate steps:
 (1) step6-megares alignment file providing ARG read/sequence ID and MEGID
 (2) step9-Contig ID and the aligned ARG read ID
 (3) step10-Contig ID and the taxonomy assignment'''
 
+import numpy
 import pandas as pd # install pandas in the same directory as this script
 import csv
 
