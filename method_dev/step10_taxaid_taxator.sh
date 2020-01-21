@@ -34,7 +34,8 @@ echo "STEP 10 DONE AT: "; date
 # -a: taxa assignment algorithmn, -g:taxid mapping file, -p: threads
 export TAXATORTK_TAXONOMY_NCBI="/share/lemaylab-backedup/milklab/database/refseq"
 
-/software/blast/2.9+/lssc0-linux/bin/blastn -db /share/lemaylab-backedup/milklab/database/refseq/blastdb_test100 -outfmt '6 qseqid qstart qend qlen sseqid sstart send bitscore evalue nident length' -query /share/lemaylab-backedup/milklab/database/refseq/query_test.fna | /share/lemaylab-backedup/milklab/programs/taxator-tk_1.3.3e-64bit/bin/taxator -a megan-lca -t 0.3 -e 0.01 -g /share/lemaylab-backedup/milklab/database/refseq/nucl_wgs_taxidmap4.txt > taxator_predictions_test.gff3
+/software/blast/2.9+/lssc0-linux/bin/blastn -db /share/lemaylab-backedup/milklab/database/refseq/blastdb_test100 -outfmt '6 qseqid qstart qend qlen sseqid sstart send bitscore evalue nident length' -query /share/lemaylab-backedup/milklab/database/refseq/query_test.fna ######
+ | /share/lemaylab-backedup/milklab/programs/taxator-tk_1.3.3e-64bit/bin/taxator -a megan-lca -t 0.3 -e 0.01 -g /share/lemaylab-backedup/milklab/database/refseq/nucl_wgs_taxidmap4.txt > taxator_predictions_test.gff3
 #An unrecoverable error occurred: std::exception
 #
 #Here is some debugging information to locate the problem:
