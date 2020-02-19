@@ -1,12 +1,14 @@
 #!/bin/sh
 
 #       0. Starting files location
-starting_files_location=/share/lemaylab-backedup/Zeya/raw_data/NovaSeq072/d33hg4hd69/Un_DTDB118/Project_DLZA_Nova072P_Alkan
+starting_files_location=/share/lemaylab-backedup/Zeya/raw_data/NovaSeq072_rerun/Project_DLZA_Nova072P_Alkan_Pippin2
 
-unzipped_files_output=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq072/unzipped
+unzipped_files_output=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq072_rerun/unzipped
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq072_rerun
+mkdir $unzipped_files_output
 
 # for loop to unzip all gz file to fastq in one file 
-for file in $starting_files_location/*fastq.gz
+for file in $starting_files_location/5*fastq.gz
 do
 	STEM=$(basename "${file}" .gz)
 
