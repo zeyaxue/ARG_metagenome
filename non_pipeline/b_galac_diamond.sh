@@ -13,13 +13,32 @@ output_dir_flash=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step4_f
 mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/b_galac_diamond
 output_dir_diamond=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/b_galac_diamond
 
-for file in $output_dir_flash/*.extendedFrags.fastq
-do
-	STEM=$(basename "$file" .extendedFrags.fastq)
+#for file in $output_dir_flash/*.extendedFrags.fastq
+#do
+#	STEM=$(basename "$file" .extendedFrags.fastq)
+#
+#	# eval chosen based on recommendations for 200-250bp reads
+#	$diamond_location blastx --db $db -q $file -a $output_dir_diamond/${STEM}.daa -t ./ -k 1 --sensitive --evalue 1e-25
+#	$diamond_location view --daa $output_dir_diamond/${STEM}.daa -o $output_dir_diamond/${STEM}.txt -f tab	
+#done
+#
+#mv log.txt $output_dir_diamond/log.txt
 
-	# eval chosen based on recommendations for 200-250bp reads
-	$diamond_location blastx --db $db -q $file -a $output_dir_diamond/${STEM}.daa -t ./ -k 1 --sensitive --evalue 1e-25
-	$diamond_location view --daa $output_dir_diamond/${STEM}.daa -o $output_dir_diamond/${STEM}.txt -f tab	
+for file in $output_dir_diamond/*.daa
+do	
+	STEM=$(basename "$file" .daa)
+
+	#python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/CAZy_db_analysis_counter.py \
+	#-ref /share/lemaylab-backedup/databases/b-galactosidase/B-galac_family_names.tsv \
+	#-I $output_dir_diamond/${STEM}.txt \
+	#-O $output_dir_diamond/${STEM}_org.txt
+
+	python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/merge_organized_diamond_tab.py \
+	--in $output_dir_diamond/${STEM}_org.txt \
+	--out $output_dir_diamond/${STEM}_org_samid.txt \
+	--mergein $file # This argument does not do anything here, but python2 requires *args to be not empty so I supply a dummy argument 
+
+	python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/merge_organized_diamond_tab.py \
+	--mergeout $output_dir_diamond/merged_diamond_tab.csv \
+	--mergein $output_dir_diamond/*_org_samid.txt
 done
-
-mv log.txt $output_dir_diamond/log.txt
