@@ -25,7 +25,7 @@ def add_sampleid(infp=None, outfp=None):
 		fn = os.path.basename(infp) # get the xx_gene.tsv file name
 		samid = re.search('(.+?)_org.txt', fn).group(1)
 
-		intab = pd.read_csv(infp, sep='\t', header=None, names=["family", samid])
+		intab = pd.read_csv(infp, sep=',', header=None, names=["family", samid])
 	except:
 		pass
 
