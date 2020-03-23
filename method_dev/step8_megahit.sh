@@ -8,8 +8,8 @@ echo "NOW STARTING ASEEMBLY WITH MEGAHIT AT: "; date
 
 output_dir_flash=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step4_flash
 output_dir_dup=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step3_fastuniq
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit
-megahit_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit_nomerg
+megahit_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit_nomerg
 
 megahit=/share/lemaylab-backedup/milklab/programs/MEGAHIT-1.2.9-Linux-x86_64-static/bin/megahit
 
@@ -26,11 +26,12 @@ do
 		# usage instruction at https://github.com/voutcn/megahit & http://www.metagenomics.wiki/tools/assembly/megahit
 		# use 70% memory and 20 threads
 		$megahit -1 $output_dir_dup/${STEM}_R1_dup.fastq  -2 $output_dir_dup/${STEM}_R2_dup.fastq \
-		-r $file \
 		-m 0.7 -t 20 \
 		-o $megahit_outdir/${STEM}_assembled
 	fi	
 done
+
+mv log $megahit_outdir/log
 
 echo "STEP 8 DONE AT: "; date
 
