@@ -1,6 +1,6 @@
 #!/bin/bash
 
-run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq112
 
 
 ####################################################################
@@ -22,7 +22,7 @@ microbecensus=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scri
 # because the home directory gets wiped clean every time I log out?
 RAPSEARCH=/share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/microbe_census/bin/rapsearch_Linux_2.15
 
-for file in $flash_outdir/5002.extendedFrags.fastq
+for file in $flash_outdir/*.extendedFrags.fastq
 do
 	STEM=$(basename "$file" .extendedFrags.fastq)
 
@@ -45,6 +45,6 @@ do
 		## set at 77 million reads to use all reads (77 million reads = F + R)
 		$microbecensus $file $mc_outdir/${STEM}_mc.txt \
 		-r $RAPSEARCH \
-		-l 150 -t 20 -n 77000000 #change per run 
+		-l 150 -t 20 -n 100000000 #change per run 
 	fi
 done
