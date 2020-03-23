@@ -9,9 +9,9 @@ echo "NOW STARTING SHORT READ AND CONTIG ALIGNMENT AT: "; date
 
 # Set input and output file paths
 megares_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step6_megares_bwa
-megahit_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa
-aln_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa
+megahit_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit_nomerg
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa_nomerg
+aln_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa_nomerg
 mkdir $aln_outdir/mapped_fastq
 
 # Make sure bash knows where to look for softwares 
@@ -27,28 +27,27 @@ do
 	then 	
 		echo "$aln_outdir/${STEM}_contig_aln.fasta exist"
 	else
-		echo "Processing sample $STEM now......"	
+		echo "Processing sample ${STEM} now......"	
 	
 		# convert sam file to fastq and keep only reads that are mapped
 		# usage: https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/reformat-guide/
-		$bbmap/reformat.sh in=$file out=$aln_outdir/mapped_fastq/${STEM}_megares_map.fastq mappedonly
-		# get the sequence headers that are mapped to megares db (needed for step 10)
-		$bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
-	
+		# https://github.com/BioInfoTools/BBMap/blob/master/sh/reformat.sh
+		#$bbmap/reformat.sh in=$file out=$aln_outdir/mapped_fastq/${STEM}_megares_map.fastq mappedonly
+			
 		# use bwa to index and align contigs with short reads containing ARGs
-		$bwa index $megahit_outdir/${STEM}_assembled/final.contigs.fa
-		$bwa mem -t 15 $megahit_outdir/${STEM}_assembled/final.contigs.fa $aln_outdir/mapped_fastq/${STEM}_megares_map.fastq > $aln_outdir/${STEM}_contig_aln.sam
-	
+		#$bwa index $megahit_outdir/${STEM}_assembled/final.contigs.fa
+		#$bwa mem -t 15 $megahit_outdir/${STEM}_assembled/final.contigs.fa $aln_outdir/mapped_fastq/${STEM}_megares_map.fastq > $aln_outdir/${STEM}_contig_ARGread_aln.sam
+
 		# get the contigs header containing ARG 
-		$bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
-		# change A0 based on run header & # add a space after each line for the 1st filed of the actual contig header
-		grep 'A0' $aln_outdir/${STEM}_contig_aln_maponly.sam | cut -f 3 > ${STEM}_header.txt
-		python $pyhd --i ${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
-	
-		$bbmap/filterbyname.sh in=$megahit_outdir/${STEM}_assembled/final.contigs.fa \
-		out=$aln_outdir/${STEM}_contig_aln.fasta \
-		names=$aln_outdir/${STEM}_header.txt \
-		include=t
+		#$bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_ARGread_aln.sam out=$aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.sam mappedonly 
+		
+		# gather A0-based run header from the sam file & add a space after each line for the 1st field of the actual contig header (annoying reformating due to spaces in the contig header, e.g: ">k141_49608 flag=0 multi=1.0000 len=233")
+		#grep 'A0' $aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.sam | cut -f 3 > $aln_outdir/${STEM}_header.txt
+		python $pyhd --i $aln_outdir/${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
+
+		# filter use the above list to retain ARG read aligned contigs
+		# http://seqanswers.com/forums/archive/index.php/t-75650.html
+		$bbmap/filterbyname.sh in=$megahit_outdir/${STEM}_assembled/final.contigs.fa out=$aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.fa names=$aln_outdir/${STEM}_header.txt include=t 
 	fi	
 done	
 
