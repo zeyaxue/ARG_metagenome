@@ -2,14 +2,14 @@
 
 ########################################################################################################################
 #
-# STEP 10. ID the taxonomy of contigs using taxator-tk 
+# STEP 10. ID the taxonomy of contigs using Contig Annotation Tool (CAT)
 
 echo "NOW STARTING TAXONOMY ID AT: "; date
 
 # set input and output file paths
-aln_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step10_CAT
-CAT_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step10_CAT
+aln_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa_nomerg
+mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step10_CAT_nomerg
+CAT_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step10_CAT_nomerg
 cd $CAT_outdir 
 
 # Make sure bash knows where to look for softwares 
@@ -17,10 +17,9 @@ CAT=/share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack/CAT
 progdigal=/software/prodigal/2.6.3/x86_64-linux-ubuntu14.04/bin/prodigal 
 diamond=/share/lemaylab-backedup/milklab/programs/diamond
 
-
-for file in $aln_outdir/*_contig_aln.fasta
+for file in $aln_outdir/*_contig_ARGread_aln_mappedonly.fa
 do
-	STEM=$(basename "$file" _contig_aln.fasta)
+	STEM=$(basename "$file" _contig_ARGread_aln_mappedonly.fa)
 
 	echo "Processing sample $STEM now...... "
 	# for help /share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack/CAT contigs -h
