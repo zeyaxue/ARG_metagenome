@@ -1,0 +1,39 @@
+sudo mkdir AMR_metagenome 
+cd AMR_metagenome
+sudo mkdir raw_data
+cd raw_data
+sudo mkdir Novaseq_072rerun
+cd Novaseq_072rerun
+
+sudo rsync -avL slimsdata.genomecenter.ucdavis.edu::slims/6yvjsfop9/Un_DTDB180/Project_DLZA_Nova112P_Alkan_Pippin2 .
+
+
+sudo chown -R zxue /home/AMR_metagenome/
+cd AMR_metagenome
+sudo chown -R zxue  processed_data
+sudo chown -R zxue raw_data
+sudo chown -R zxue scripts/ 
+
+# change time zone
+timedatectl # see current time
+timedatectl list-timezones
+sudo timedatectl set-timezone America/Los_Angeles
+timedatectl # check changed time 
+
+# Set up group for Lemay lab
+less /etc/group
+sudo groupadd -g 11 lemaylab # 11 is not taken 
+sudo usermod -a -G lemaylab zxue
+sudo usermod -a -G lemaylab lemay
+sudo usermod -a -G lemaylab dlemay
+groups zxue #check to see if user has been added 
+groups Lemay
+groups dlemay
+
+# add group permission to project folder
+chmod g+rx AMR_metagenome/
+chmod g+rx /software
+chmod g+rx /database 
+sudo chmod g+rx /database
+chmod g+rx /build
+sudo chmod g+rx /usr/share/modules/modulefiles
