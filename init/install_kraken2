@@ -1,0 +1,63 @@
+cd /share/lemaylab-backedup/milklab/programs
+wget https://github.com/DerrickWood/kraken2/archive/v2.0.9-beta.tar.gz
+tar xvzf v2.0.9-beta.tar.gz
+rm v2.0.9-beta.tar.gz
+cd kraken2-2.0.9-beta
+
+# install to folder /share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b
+./install_kraken2.sh /share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b
+
+# build kraken2 database with RefSeq complete bacterial,archaea and fungi genomes/proteins 
+# install taxonomy 
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --download-taxonomy --db /share/lemaylab-backedup/databases/kraken2-bact-arch-fungi
+
+# https://github.com/DerrickWood/kraken2/blob/master/docs/MANUAL.markdown
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --download-library bacteria --db /share/lemaylab-backedup/databases/kraken2-bact-arch-fungi
+##Step 1/2: Performing rsync file transfer of requested files
+##Rsync file transfer complete.
+##Step 2/2: Assigning taxonomic IDs to sequences
+##Processed 19548 projects (42615 sequences, 78.93 Gbp)... done.
+##All files processed, cleaning up extra sequence files... done, library complete.
+##Masking low-complexity regions of downloaded library... done.
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --download-library archaea --db /share/lemaylab-backedup/databases/kraken2-bact-arch-fungi
+###Processed 368 projects (567 sequences, 953.82 Mbp)... done.
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --download-library fungi --db /share/lemaylab-backedup/databases/kraken2-bact-arch-fungi
+#Processed 59 projects (1489 sequences, 1.27 Gbp)... done.
+
+## build the final database
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --build --db /share/lemaylab-backedup/databases/kraken2-bact-arch-fungi --threads 20
+#Creating sequence ID to taxonomy ID map (step 1)...
+#Sequence ID to taxonomy ID map complete. [0.143s]
+#Estimating required capacity (step 2)...
+#Estimated hash table requirement: 43997925668 bytes
+#Capacity estimation complete. [17m0.209s]
+#Building database files (step 3)...
+#Taxonomy parsed and converted.
+#CHT created with 14 bits reserved for taxid.
+#Completed processing of 44671 sequences, 81151043009 bp
+#Writing data to disk...  complete.
+#Database files completed. [2h7m18.920s]
+#Database construction complete. [Total: 2h24m19.313s]
+
+
+
+
+# build a database for protozoa  
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --download-taxonomy --db /share/lemaylab-backedup/databases/kraken2-protozoa
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --download-library protozoa --db /share/lemaylab-backedup/databases/kraken2-protozoa
+#Processed 40 projects (11167 sequences, 902.06 Mbp)... done.
+/share/lemaylab-backedup/milklab/programs/kraken2-2.0.9b/kraken2-build --build --db /share/lemaylab-backedup/databases/kraken2-protozoa --threads 20
+#Creating sequence ID to taxonomy ID map (step 1)...
+#Sequence ID to taxonomy ID map complete. [0.082s]
+#Estimating required capacity (step 2)...
+#Estimated hash table requirement: 1101818148 bytes
+#Capacity estimation complete. [10.793s]
+#Building database files (step 3)...
+#Taxonomy parsed and converted.
+#CHT created with 8 bits reserved for taxid.
+#Completed processing of 11167 sequences, 902063083 bp
+#Writing data to disk...  complete.
+#Database files completed. [1m57.523s]
+#Database construction complete. [Total: 2m8.438s]
+
+
