@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# usage: source count_fq.sh gz/fq indir outfile    
+# usage: count_fq.sh gz/fq indir outfile    
 
 touch $2/count_fq_log.txt
 
