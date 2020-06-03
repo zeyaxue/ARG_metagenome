@@ -1,0 +1,194 @@
+
+
+sudo apt-get install emacs
+sudo apt-get install environment-modules
+sudo apt-get install tclsh
+
+inspected /etc/profile.d/modules.sh  looks fine
+who (check that i'm the only one on machine)
+sudo reboot
+
+reboot didnt't fix it
+seems to work now (module avail)
+
+sudo apt-get install python3
+(python3 was already installed)
+sudo apt-get install python2.7
+
+cd /usr/share/modules/modulefiles (got this directory from module avail)
+sudo mkdir bbmap
+cd bbmap
+
+sudo mkdir /software (local directory for when stuff not available by apt-get)
+sudo mkdir /build (local directory for downloading tarballs and building stuff)
+
+cd /build
+sudo chown dlemay /build
+
+# from laptop
+scp ~/Downloads/BBMap_37.68.tar.gz dlemay@169.237.53.12:/build/.
+
+cd /build
+tar -xvzf BBMap_37.68.tar.gz
+
+# oops need java
+sudo apt-get install openjdk-11-jdk
+
+sudo chown dlemay /software
+mv bbmap/ /software/bbmap-37.68
+
+#from laptop
+scp ~/Downloads/BBMap_38.73.tar.gz dlemay@169.237.53.12:/build/.
+
+cd /build
+tar -xvzf BBMap_38.73.tar.gz
+mv bbmap/ /software/bbmap-38.73
+
+#now need to make modulefiles for the two versions
+cd /usr/share/modules/modulefiles/bbmap
+sudo touch 37.68
+sudo touch 38.73
+
+# permissions problems again
+cd /usr/share/modules/modulefiles
+sudo chown -R dlemay .
+
+# copied over modulefile from GC cluster to /usr/share/modules/modulefiles/bbmap/37.68 and edited and copied to 38.73
+
+
+git (seems to be availble as part of ubuntu)
+sed  (seems to be availble as part of ubuntu)
+awk  (seems to be availble as part of ubuntu)
+bioawk
+
+
+# See /software for a full list installed programs but the notes are gone?!
+
+######### install kraken2 and databases#######
+cd /build 
+wget https://github.com/DerrickWood/kraken2/archive/v2.0.9-beta.tar.gz
+tar xvzf v2.0.9-beta.tar.gz
+cd kraken2-2.0.9-beta
+
+# install to folder 
+./install_kraken2.sh /software/kraken2-2.0.9b
+
+# Add NCBI blast to PATH
+export PATH="/software/ncbi-blast-2.9.0+/bin/:$PATH"
+
+# install taxonomy 
+/software/kraken2-2.0.9b/kraken2-build --download-taxonomy --db /database/kraken2-bact-arch-fungi
+#Downloading nucleotide gb accession to taxon map... done.
+#Downloading nucleotide wgs accession to taxon map... done.
+#Downloaded accession to taxon map(s)
+#Downloading taxonomy tree data... done.
+#Uncompressing taxonomy data... done.
+#Untarring taxonomy tree data... done.
+
+#### build kraken2 database with RefSeq complete bacterial,archaea and fungi genomes/proteins 
+# https://github.com/DerrickWood/kraken2/blob/master/docs/MANUAL.markdown
+/software/kraken2-2.0.9b/kraken2-build --download-library bacteria --db /database/kraken2-bact-arch-fungi
+#Step 1/2: Performing rsync file transfer of requested files
+#Rsync file transfer complete.
+#Step 2/2: Assigning taxonomic IDs to sequences
+#Processed 19568 projects (42649 sequences, 79.01 Gbp)... done.
+#All files processed, cleaning up extra sequence files... done, library complete.
+#Masking low-complexity regions of downloaded library... done.
+/software/kraken2-2.0.9b/kraken2-build --download-library archaea --db /database/kraken2-bact-arch-fungi
+#Processed 368 projects (567 sequences, 953.82 Mbp)... done.
+/software/kraken2-2.0.9b/kraken2-build --download-library fungi --db /database/kraken2-bact-arch-fungi
+#Processed 59 projects (1489 sequences, 1.27 Gbp)... done.
+
+## build the final database
+/software/kraken2-2.0.9b/kraken2-build --build --db /database/kraken2-bact-arch-fungi --threads 20
+#Creating sequence ID to taxonomy ID map (step 1)...
+#Sequence ID to taxonomy ID map complete. [0.299s]
+#Estimating required capacity (step 2)...
+#Estimated hash table requirement: 44023001964 bytes
+#Capacity estimation complete. [9m1.324s]
+#Building database files (step 3)...
+#Taxonomy parsed and converted.
+#CHT created with 14 bits reserved for taxid.
+#Completed processing of 44705 sequences, 81238685275 bp
+#Writing data to disk...  complete.
+#Database files completed. [1h17m8.516s]
+#Database construction complete. [Total: 1h26m10.925s]
+
+#### build a database for protozoa
+/software/kraken2-2.0.9b/kraken2-build  --download-taxonomy --db /database/kraken2-protozoa
+/software/kraken2-2.0.9b/kraken2-build --download-library protozoa --db /database/kraken2-protozoa
+/software/kraken2-2.0.9b/kraken2-build --build --db /database/kraken2-protozoa --threads 20
+#Completed processing of 11167 sequences, 902063083 bp
+
+######### install bracken#######
+cd /build
+wget https://github.com/jenniferlu717/Bracken/archive/v2.6.0.tar.gz
+tar -xvf v2.6.0.tar.gz 
+mv Bracken-2.6.0/ /software/
+cd /software/Bracken-2.6.0/
+sh install_bracken.sh 
+
+# Generate the Bracken database file
+./bracken-build -d /database/kraken2-bact-arch-fungi -t 30 -k 35 -l 151 -x /software/kraken2-2.0.9b/
+#.1)     	44736 sequences converted
+#	Time Elaped: 22 minutes, 28 seconds, 0.00000 microseconds
+#	=============================
+#PROGRAM START TIME: 05-16-2020 22:43:25
+#...9341 total genomes read from kraken output file
+#...creating kmer counts file -- lists the number of kmers of each classification per genome
+#...creating kmer distribution file -- lists genomes and kmer counts contributing to each genome
+#PROGRAM END TIME: 05-16-2020 22:43:25
+#          Finished creating database151mers.kraken and database151mers.kmer_distrib [in DB folder]
+#          *NOTE: to create read distribution files for multiple read lengths, 
+#                 rerun this script specifying the same database but a different read length
+#
+#Bracken build complete.
+
+# Compute classifications for each perfect read from one of the input sequences
+ ./src/kmer2read_distr --seqid2taxid /database/kraken2-bact-arch-fungi/seqid2taxid.map --taxonomy /database/kraken2-bact-arch-fungi/taxonomy --kraken /database/kraken2-bact-arch-fungi/database.kraken --output /database/kraken2-bact-arch-fungi/database151mers.kraken -k 35 -l 151 -t 30
+ #	44736 sequences converted
+#	Time Elaped: 20 minutes, 43 seconds, 0.00000 microseconds
+
+
+# Generate the kmer distribution file
+python ./src/generate_kmer_distribution.py -i /database/kraken2-bact-arch-fungi/database151mers.kraken -o /database/kraken2-bact-arch-fungi/database151mers.kmer_distrib
+
+
+#########transfer the KEGG database #########
+cd /database/
+rsync -vah xzyao@spitfire.genomecenter.ucdavis.edu:/share/lemaylab-backedup/databases/kegg/ kegg/
+
+# Format the protein database containing all prokaryotes genes
+/software/diamond-0.9.21/diamond makedb --in /database/kegg/genes/fasta/prokaryotes.pep.gz \
+--db /database/kegg/genes/fasta/prokaryotes.pep
+
+# Check out what are the files in the KEGG folders 
+cd /database/kegg/module
+tar -xvf ko.tar.gz 
+cd /database/kegg/pathway
+
+
+
+
+
+
+
+
+
+as modules
+- Python 
+- miniconda / anaconda?
+- R
+- java
+- blast
+- bbmap
+- bamtools
+- bowtie2
+- bwa
+- diamond
+- fastuniq
+- flash
+- megahit
+- seqtk
+- samtools
+- trimmomatic
