@@ -63,6 +63,7 @@ bioawk
 
 
 # See /software for a full list installed programs but the notes are gone?!
+# bbmap, blast, bwa, diamond, fastuniq, flash, megabit are installed as modules 
 
 ######### install kraken2 and databases#######
 cd /build 
@@ -168,11 +169,37 @@ tar -xvf ko.tar.gz
 cd /database/kegg/pathway
 
 
+#########Install Metaphlan2 #########
+cd /software
+git clone https://github.com/biobakery/metaphlan
+mv metaphlan/ metaphlan2-2.8
+# install biopyton as prerequisite	
+conda activate metagenome_zx 
+conda install -c conda-forge biopython
 
 
 
+#########Install bowtie2 as module #########
+cd build/
+wget https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.3.4.1/bowtie2-2.3.4.1-linux-x86_64.zip/download 
+## Need to install unzip command first
+sudo apt install unzip
+unzip download
+mv bowtie2-2.3.4.1-linux-x86_64/ /software/bowtie2-2.3.4.1
+## Make a modulefile
+cd /usr/share/modules/modulefiles/
+mkdir bowtie2
+touch bowtie2/2.3.4.1
+nano bowtie2/2.3.4.1
+# copied over modulefile from GC cluster /software/modules/1.923/lssc0-linux/modulefiles and edited 
+module load bowtie2
+## success 
 
+#########transfer the kraken2 nt database #########
+cd /database/
+rsync -vah xzyao@spitfire.genomecenter.ucdavis.edu:/share/lemaylab-backedup/databases/kraken2-nt/ kraken2-nt/
 
+ 
 
 
 as modules
@@ -180,15 +207,15 @@ as modules
 - miniconda / anaconda?
 - R
 - java
-- blast
-- bbmap
+-
+-
 - bamtools
-- bowtie2
-- bwa
-- diamond
-- fastuniq
-- flash
-- megahit
+-
+-
+-
+-
+-
+-
 - seqtk
 - samtools
-- trimmomatic
+-
