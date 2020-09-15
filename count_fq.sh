@@ -4,8 +4,6 @@
 
 touch $2/count_fq_log.txt
 
-# get the 
-
 
 if [ "$1" = "fq" ]
 then 
@@ -34,7 +32,8 @@ cd $2
 
 # Make sampleID column
 ## I tried over several hours to wrangle the data in variables but that did not work
-awk 'NR%2==1' $2/count_fq_log.txt > $2/col1a.txt  # use $() to denote everthing between () are excutable commands
+awk 'NR%2==1' $2/count_fq_log.txt > $2/col1a.txt  
+# use $() to denote everthing between () are excutable commands
 $(echo sampleID > $2/col1b.txt) # column header
 $(sed 's/_.*//' $2/col1a.txt >> $2/col1b.txt) # need the . period symbol for wildcard to work
 
