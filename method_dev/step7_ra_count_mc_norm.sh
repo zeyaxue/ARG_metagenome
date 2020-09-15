@@ -5,7 +5,7 @@
 # STEP 7. Count the MEGARes database alignment and normalize the count 
 # table with MicrobeCensus generated genome equivalents per sample
 
-run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
+run_dir=/home/AMR_metagenome/processed_data/Novaseq_072rerun
 
 #echo "NOW MAKING COUNT TABLE AT: "; date
 #
@@ -41,27 +41,27 @@ megares_outdir=$run_dir/step6_megares_bwa
 
 echo "NOW STARTING COUNT TABLE NORMALIZATION AT: "; date
 
-norm=/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/make_RPKG_normtab.py
+norm=/home/AMR_metagenome/scripts/make_RPKG_normtab.py
 
-mc_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step5_MicrobeCensus
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/normalized_tab
-norm_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step7_norm_count_tab/normalized_tab
+mc_outdir=$run_dir/step5_MicrobeCensus
+mkdir $run_dir/step7_norm_count_tab/normalized_tab
+norm_outdir=$run_dir/step7_norm_count_tab/normalized_tab
 
 # make sure python knows where to look for pkgs
-export PATH="/home/xzyao/.local/bin:$PATH"
+#export PATH="/home/xzyao/.local/bin:$PATH"
 
-for file in $ra_outdir/*_gene.tsv
-do
-	STEM=$(basename "$file" _gene.tsv)
-
-	python $norm \
-	--mc $mc_outdir/${STEM}_allreads_mc.txt \
-	--genelen /share/lemaylab-backedup/milklab/database/megares_v2/megares_modified_database_v2_GeneLen_org.tsv \
-	--count $file \
-	--out $norm_outdir/${STEM}_norm.csv \
-	--mergein $file # This argument does not do anything here, but python2 requires *args to be not empty so I supply a dummy argument (if using python3, can omit this input)
-done	
-
+#for file in $ra_outdir/7092_gene.tsv
+#do
+#	STEM=$(basename "$file" _gene.tsv)
+#
+#	python $norm \
+#	--mc $mc_outdir/${STEM}_allreads_mc.txt \
+#	--genelen /database/megares_v2/megares_modified_database_v2_GeneLen_org.tsv \
+#	--count $file \
+#	--out $norm_outdir/${STEM}_norm.csv \
+#	--mergein $file # This argument does not do anything here, but python2 requires *args to be not empty so I supply a dummy argument (if using python3, can omit this input)
+#done	
+#
 
 # use the python script again to merge tables
 python $norm \
