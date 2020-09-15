@@ -4,6 +4,7 @@ cd /share/lemaylab-backedup/databases/CAZy
 wget http://bcb.unl.edu/dbCAN2/download/CAZyDB.07312019.fa 
 wget http://bcb.unl.edu/dbCAN2/download/Databases/CAZyDB.07312019.fam-activities.txt
 wget http://bcb.unl.edu/dbCAN2/download/Databases/CAZyDB.07312019.fam.subfam.ec.txt
+wget http://bcb.unl.edu/dbCAN2/download/Databases/CAZyDB.07302020.fam-activities.txt
 
 
 # Formate the database for diamond
