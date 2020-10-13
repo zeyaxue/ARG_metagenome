@@ -1,0 +1,23 @@
+# Try to find the limit of detection for a single AMR gene after MicrobeCensus normalization
+# Assume the raw detection limit is 1 copy of the gene
+# The MicrobeCensus normalization formula is Hits/((len in kb)*GE)
+# Therefore the detection limit would be 1/(biggest len * biggest GE)
+
+# Find the biggest length of ARG 
+cd /database/megares_v2
+cut megares_drugs_database_v2.00_GeneLen.txt -f 2 | sort -g ## 5297
+
+
+# Find the biggest GE 
+cd /home/AMR_metagenome/processed_data/Novaseq_072rerun/step5_MicrobeCensus
+for f in *_allreads_mc.txt; do cut $f -f 2 | tail -n 1 >> ge.txt; done
+## sort all ge values from run 072 
+sort -g ge.txt ## 4142.94174481
+## Perform similar analysis for run 043 and 112
+## 4085.57649788 for run 043
+## 3402.4416549 for run 112
+####### The biggest GE value is 4142.94174481######
+
+
+# Calculate detection limit
+# 1/(5297*4143) = 4.56E-08
