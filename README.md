@@ -33,9 +33,9 @@ See the method_dev/ folder, individual steps are labelled with their step number
 
 "ARG_pipeline_v0.2.sh" is the master script containing the entire AMR pipeline, with preferred softwares/methods/orders of sequence processing.
 
-compare_merged_fq_N.sh: count the number of N base in a fastq file 
-run_hts_Stat_xxx.sh: use hts software to generate pipeline status
-ARG_detection_limit.txt: Find the detection limit ARG (1 sequence count after MicrobeCensus normalization)
+	+ compare_merged_fq_N.sh: count the number of N base in a fastq file 
+	+ run_hts_Stat_xxx.sh: use hts software to generate pipeline status
+	+ ARG_detection_limit.txt: Find the detection limit ARG (1 sequence count after MicrobeCensus normalization)
 
 ## KEGG, Beta-galactosidase, CAZy, and other scripts
 See the non_pipeline/ folder
