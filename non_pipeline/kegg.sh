@@ -1,10 +1,10 @@
 #!/bin/bash 
 
-run_dir=/home/AMR_metagenome/processed_data/Novaseq_072rerun
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 
 # DIAMOND
-diamond_location=/software/diamond-0.9.21/diamond
-db=/database/kegg/genes/fasta/prokaryotes.pep.dmnd
+diamond_location=/share/lemaylab-backedup/milklab/programs/diamond
+db=/share/lemaylab-backedup/databases/kegg/genes/fasta/prokaryotes.pep.dmnd
 
 ####################################################################
 #
@@ -21,10 +21,20 @@ for file in $output_dir_flash/*.extendedFrags.fastq
 do
 	STEM=$(basename "$file" .extendedFrags.fastq)
 
-	# eval chosen based on recommendations for 200-250bp reads
-	$diamond_location blastx --db $db -q $file -a $output_dir_kegg/${STEM}.daa \
-	-t ./ -k 1 --sensitive --evalue 1e-25
-	$diamond_location view --daa $output_dir_kegg/${STEM}.daa -o $output_dir_kegg/${STEM}.txt -f tab	
+	if [ -f $output_dir_kegg/${STEM}.txt ]
+	then 
+		echo "${STEM}.txt exist"
+	else 
+		echo "Processing sample ${STEM} now"	
+
+		# eval chosen based on recommendations for 200-250bp reads
+		$diamond_location blastx --db $db -q $file -a $output_dir_kegg/${STEM}.daa \
+		-t ./ -k 1 --sensitive --evalue 1e-25
+		$diamond_location view --daa $output_dir_kegg/${STEM}.daa -o $output_dir_kegg/${STEM}.txt -f tab	
+	fi
 done
+
+
+# Count/organize the DIAMOND output file
 
 echo "KEGG alignment DONE AT: "; date
