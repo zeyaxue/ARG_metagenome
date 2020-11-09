@@ -74,6 +74,3 @@ pipeline_stats.ipynb: Jupyter notebook to generate QC figures for raw and proces
 prefix_to_compline.py: converts partial headers extracted from sam file to full headers 
 subset_reads.sh: subset sequence files in a loop
 
-
-## taxaid_outdir
-temporary folder for toubleshooting the 
