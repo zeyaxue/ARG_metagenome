@@ -1,0 +1,25 @@
+# Danielle already downloaded the database 
+
+tar -xvf /share/lemaylab-backedup/databases/kegg/genes/ko.tar.gz
+
+# prokaryotes.pep.gz - KEGG GENES prokaryotes amino acid sequences <--- from README.fasta file
+
+# Format the database for DIAMOND 
+/share/lemaylab-backedup/milklab/programs/diamond makedb \
+--in /share/lemaylab-backedup/databases/kegg/genes/fasta/prokaryotes.pep.gz \
+ --db /share/lemaylab-backedup/databases/kegg/genes/fasta/prokaryotes.pep
+
+
+ #### 
+ # prokaryotes.pep.dmnd: DIAMOND database file
+ # prokaryotes.dat: file that list KO ID and gene ID
+ gunzip /share/lemaylab-backedup/databases/kegg/genes/fasta/prokaryotes.dat.gz 
+
+
+# get the list of all KEGG gene ids (A)
+### get fasta header: >eco:b0004  thrC; threonine synthase
+### get the part without ">"
+### get gene name without annotation: eco:b0004
+grep ">" prokaryotes.pep.fasta | cut -d ">" -f 2 | cut -d " " -f 1 > kegg_gene_ids.txt
+
+# Alternative method to extract all gene ids

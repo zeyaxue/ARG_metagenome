@@ -1,0 +1,10 @@
+# Transfer NovaSeq 072 run data from Lemay lab workstation to spitfire
+## Logged in on the Lemay lab workstation 
+rsync -avL /home/AMR_metagenome/processed_data/Novaseq_072rerun xzyao@spitfire.genomecenter.ucdavis.edu:/share/lemaylab-backedup/Zeya/proceesed_data/
+
+
+# Transfer NovaSeq 112 processed data from spitfire to Lemay lab workstation to start the KEGG alignment with DIAMOND 
+## logged in on the Lemay lab workstation 
+cd /home/AMR_metagenome/processed_data
+mkdir NovaSeq112
+rsync -avL xzyao@spitfire.genomecenter.ucdavis.edu:/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq112/step4_flash /home/AMR_metagenome/processed_data/NovaSeq112 
