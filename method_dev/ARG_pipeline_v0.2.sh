@@ -11,44 +11,44 @@ run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq112/
 
 ## File paths
 unzip_outdir=$run_dir/unzipped
-#mkdir $run_dir/step1_BMTagger/ 
+mkdir $run_dir/step1_BMTagger/ 
 bmt_outdir=$run_dir/step1_BMTagger
 #
 ## Software paths
-#bmtagger_location=/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger
-#human_db=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13
-#
-#PATH=$PATH:/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger
-#PATH=$PATH:/share/lemaylab-backedup/milklab/programs/srprism/gnuac/app
-#module load blast
-#module load java bbmap
-#echo "NOW STARTING HUMAN READ REMOVAL STEP AT: "; date
-#
-#for file in $unzip_outdir/*R1_001.fastq
-#do
-#  file1=$file
-#  file2=$(echo $file1 | sed 's/R1_001/R2_001/')
-#	filename=$(basename "$file1")
-#  basename=$(echo $filename | cut -f 1 -d "_")
-#	outname="$bmt_outdir/$basename"
-#
-#  if [ -f $outname.human.txt ]
-#  then 
-#    echo $outname.human.txt already exist and will not be overwritten.
-#  else
-#    echo $outname.human.txt does not exist. Running BMTagger now...
-#    $bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
-#
-#    # filterbyname.sh is included in the bbmap module 
-#    # bbmap module location: /software/bbmap/37.68/static/bbmap.sh
-#    # I included a local copy of this program: /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh
-#    # This script removes sequences in both R1 and R2 that matches the human reads 
-#    # (sequence header is passed to the script in the outname.human.txt file)
-#    filterbyname.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
-#  fi
-#done
-#
-#echo "STEP 1 DONE AT: "; date
+bmtagger_location=/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger
+human_db=/share/lemaylab-backedup/milklab/database/human_GRCh38_p13
+
+PATH=$PATH:/share/lemaylab-backedup/milklab/programs/bmtools/bmtagger
+PATH=$PATH:/share/lemaylab-backedup/milklab/programs/srprism/gnuac/app
+module load blast
+module load java bbmap
+echo "NOW STARTING HUMAN READ REMOVAL STEP AT: "; date
+
+for file in $unzip_outdir/*R1_001.fastq
+do
+  file1=$file
+  file2=$(echo $file1 | sed 's/R1_001/R2_001/')
+	filename=$(basename "$file1")
+  basename=$(echo $filename | cut -f 1 -d "_")
+	outname="$bmt_outdir/$basename"
+
+  if [ -f $outname.human.txt ]
+  then 
+    echo $outname.human.txt already exist and will not be overwritten.
+  else
+    echo $outname.human.txt does not exist. Running BMTagger now...
+    $bmtagger_location/bmtagger.sh -b $human_db/GCF_000001405.39_GRCh38.p13_genomic.bitmask -x $human_db/GCF_000001405.39_GRCh38.p13_genomic.srprism -q 1 -1 $file1 -2 $file2 -o $outname.human.txt
+
+    # filterbyname.sh is included in the bbmap module 
+    # bbmap module location: /software/bbmap/37.68/static/bbmap.sh
+    # I included a local copy of this program: /share/lemaylab-backedup/milklab/programs/filterbyname_v37.68.sh
+    # This script removes sequences in both R1 and R2 that matches the human reads 
+    # (sequence header is passed to the script in the outname.human.txt file)
+    filterbyname.sh in=$file1 in2=$file2 out=$outname.R1_nohuman.fastq out2=$outname.R2_nohuman.fastq names=$outname.human.txt include=f
+  fi
+done
+
+echo "STEP 1 DONE AT: "; date
 
 ####################################################################
 
@@ -68,20 +68,20 @@ trim_outdir=$run_dir/step2_trim
 
 # Software paths
 # Trimmomatic
-#trimmomatic_location=/software/trimmomatic/0.33/static/trimmomatic-0.33.jar
-#
-#for file in $bmt_outdir/*.R1_nohuman.fastq
-#do
-#  STEM=$(basename "${file}" .R1_nohuman.fastq)
-#
-#  file1=$file
-#  file2=$bmt_outdir/${STEM}.R2_nohuman.fastq
-#  
-#  # remove adapter and trimming at the same time (TrueSeq3-PE-2.fa, PE1_rc and PE2_rc)
-#  java -jar $trimmomatic_location PE -threads 15 $file1 $file2 $trim_outdir/${STEM}_R1_paired.fastq $trim_outdir/${STEM}_R1_unpaired.fastq.gz $trim_outdir/${STEM}_R2_paired.fastq $trim_outdir/${STEM}_R2_unpaired.fastq.gz ILLUMINACLIP:/share/lemaylab-backedup/milklab/programs/trimmomatic_adapter_input.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:99
-#done
+trimmomatic_location=/software/trimmomatic/0.33/static/trimmomatic-0.33.jar
 
-#echo "STEP 2 DONE AT: "; date
+for file in $bmt_outdir/*.R1_nohuman.fastq
+do
+  STEM=$(basename "${file}" .R1_nohuman.fastq)
+
+  file1=$file
+  file2=$bmt_outdir/${STEM}.R2_nohuman.fastq
+  
+  # remove adapter and trimming at the same time (TrueSeq3-PE-2.fa, PE1_rc and PE2_rc)
+  java -jar $trimmomatic_location PE -threads 15 $file1 $file2 $trim_outdir/${STEM}_R1_paired.fastq $trim_outdir/${STEM}_R1_unpaired.fastq.gz $trim_outdir/${STEM}_R2_paired.fastq $trim_outdir/${STEM}_R2_unpaired.fastq.gz ILLUMINACLIP:/share/lemaylab-backedup/milklab/programs/trimmomatic_adapter_input.fa:2:30:10 SLIDINGWINDOW:4:15 MINLEN:99
+done
+
+echo "STEP 2 DONE AT: "; date
 
 ####################################################################
 #
@@ -180,8 +180,11 @@ do
   else 
     echo "Processing sample $file now" 
   
-    export PATH="/home/xzyao/miniconda3/bin:$PATH"
-    export PATH="/home/xzyao/.local/bin:$PATH"
+    # Change the path to your home path on spitfire.
+    # Actually no longer needed after specifying the RAPsearch2 location
+    ##export PATH="/home/xzyao/miniconda3/bin:$PATH"
+    ##export PATH="/home/xzyao/.local/bin:$PATH"
+
     # change dir for writing temporary files
     export TMPDIR=$mc_outdir
           
@@ -194,7 +197,7 @@ do
     ## set at 100 million reads to use all reads (100 million reads should be more than the biggest lib size)
     $microbecensus $file,$file2 $mc_outdir/${STEM}_mc.txt \
     -r $RAPSEARCH \
-    -l 150 -t 20 -n 100000000 #change per run 
+    -l 150 -t 20 -n 100000000 #change per run depending library size (read numbers per sample) 
   fi
 done
 
@@ -247,7 +250,6 @@ ra_outdir=$run_dir/step7_norm_count_tab/resistomeanalyzer_output
 
 # Software paths
 ranalyzer=/share/lemaylab-backedup/milklab/programs/resistomeanalyzer/resistome
-megares_dir=/share/lemaylab-backedup/milklab/database/megares_v2
 
 for file in $megares_outdir/*_align.sam
 do
@@ -296,122 +298,119 @@ echo "STEP 7 DONE AT: "; date
 
 
 
-
-
-
 #####################################################################
 ##
 ## STEP 8. Assemble reads into contigs with megaHIT
-#
-#echo "NOW STARTING ASEEMBLY WITH MEGAHIT AT: "; date
-#
-## File paths
-#mkdir $run_dir/step8_megahit
-#megahit_outdir=$run_dir/step8_megahit
-#
-## Software paths
-#megahit=/share/lemaylab-backedup/milklab/programs/MEGAHIT-1.2.9-Linux-x86_64-static/bin/megahit
-#
-## assemble with paired end reads input (after fastuniq deduplicate)
-#for file in $flash_outdir/*.extendedFrags.fastq
-#do
-#        STEM=$(basename "$file" .extendedFrags.fastq)
-#
-#        if [ -f $megahit_outdir/${STEM}_assembled/final.contigs.fa ]
-#        then
-#                echo "$megahit_outdir/${STEM}_assembled/final.contigs.fa exist"
-#        else    
-#                # usage instruction at https://github.com/voutcn/megahit & http://www.metagenomics.wiki/tools/assembly/megahit
-#                # use 70% memory and 20 threads
-#                $megahit -1 $dup_outdir/${STEM}_R1_dup.fastq  -2 $dup_outdir/${STEM}_R2_dup.fastq \
-#                -m 0.7 -t 20 \
-#                -o $megahit_outdir/${STEM}_assembled
-#        fi      
-#done
-#
-#echo "STEP 8 DONE AT: "; date
-#
+
+echo "NOW STARTING ASEEMBLY WITH MEGAHIT AT: "; date
+
+# File paths
+mkdir $run_dir/step8_megahit_in_trimmomatic
+megahit_outdir=$run_dir/step8_megahit_in_trimmomatic
+
+# Software paths
+megahit=/share/lemaylab-backedup/milklab/programs/MEGAHIT-1.2.9-Linux-x86_64-static/bin/megahit
+
+# assemble with paired end reads input (after trimmomatic)
+for file in $trim_outdir/*_R1_paired.fastq 
+do
+        STEM=$(basename "$file" _R1_paired.fastq)
+
+        if [ -f $megahit_outdir/${STEM}_assembled/final.contigs.fa ]
+        then
+                echo "$megahit_outdir/${STEM}_assembled/final.contigs.fa exist"
+        else    
+                # usage instruction at https://github.com/voutcn/megahit & http://www.metagenomics.wiki/tools/assembly/megahit
+                # use 70% memory and 20 threads
+                $megahit -1 $file -2 $trim_outdir/${STEM}_R2_paired.fastq \
+                -m 0.7 -t 20 \
+                -o $megahit_outdir/${STEM}_assembled
+        fi      
+done
+
+echo "STEP 8 DONE AT: "; date
+
 ########################################################################################################################
 ##
 ## STEP 9. ALIGN SHORT READS CONTAINING ARG TO CONTIGS
-#
-#echo "NOW STARTING SHORT READ AND CONTIG ALIGNMENT AT: "; date
-#
-## File paths
-#mkdir $run_dir/step9_contig_bwa
-#aln_outdir=$run_dir/step9_contig_bwa
-#mkdir $aln_outdir/mapped_fastq
-#
-## Software paths
-#bbmap=/software/bbmap/37.68/static/
-#bwa=/software/bwa/0.7.16a/lssc0-linux/bwa
-#pyhd=/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/prefix_to_compline.py
-#
-#for file in $megares_outdir/*_align.sam
-#do
-#        STEM=$(basename "$file" _align.sam)
-#        
-#        if [ -f $aln_outdir/${STEM}_contig_aln.fasta ]
-#        then    
-#                echo "$aln_outdir/${STEM}_contig_aln.fasta exist"
-#        else
-#                echo "Processing sample $STEM now......"        
-#        
-#                # convert sam file to fastq and keep only reads that are mapped
-#                # usage: https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/reformat-guide/
-#                $bbmap/reformat.sh in=$file out=$aln_outdir/mapped_fastq/${STEM}_megares_map.fastq mappedonly
-#                # get the sequence headers that are mapped to megares db (needed for step 10)
-#                $bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
-#        
-#                # use bwa to index and align contigs with short reads containing ARGs
-#                $bwa index $megahit_outdir/${STEM}_assembled/final.contigs.fa
-#                $bwa mem -t 15 $megahit_outdir/${STEM}_assembled/final.contigs.fa $aln_outdir/mapped_fastq/${STEM}_megares_map.fastq > $aln_outdir/${STEM}_contig_aln.sam
-#        
-#                # get the contigs header containing ARG 
-#                $bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_aln.sam out=$aln_outdir/${STEM}_contig_aln_maponly.sam mappedonly 
-#                # change A0 based on run header & # add a space after each line for the 1st filed of the actual contig header
-#                grep 'A0' $aln_outdir/${STEM}_contig_aln_maponly.sam | cut -f 3 > ${STEM}_header.txt
-#                python $pyhd --i ${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
-#        
-#                $bbmap/filterbyname.sh in=$megahit_outdir/${STEM}_assembled/final.contigs.fa \
-#                out=$aln_outdir/${STEM}_contig_aln.fasta \
-#                names=$aln_outdir/${STEM}_header.txt \
-#                include=t
-#        fi      
-#done    
-#
-#echo "STEP 9 DONE AT: "; date
-#
+
+echo "NOW STARTING SHORT READ AND CONTIG ALIGNMENT AT: "; date
+
+# File paths
+mkdir $run_dir/step9_contig_bwa_nomerg
+aln_outdir=$run_dir/step9_contig_bwa_nomerg
+mkdir $aln_outdir/mapped_fastq
+
+# Software paths
+bbmap=/software/bbmap/37.68/static/
+bwa=/software/bwa/0.7.16a/lssc0-linux/bwa
+pyhd=/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/prefix_to_compline.py
+
+for file in $megares_outdir/*_align.sam
+do
+  STEM=$(basename "$file" _align.sam)
+        
+  if [ -f $aln_outdir/${STEM}_contig_aln.fasta ]
+  then
+    echo "$aln_outdir/${STEM}_contig_aln.fasta exist"
+  else
+    echo "Processing sample ${STEM} now......"      
+        
+    # convert sam file to fastq and keep only reads that are mapped
+    # usage: https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/reformat-guide/
+    # https://github.com/BioInfoTools/BBMap/blob/master/sh/reformat.sh
+    $bbmap/reformat.sh in=$file out=$aln_outdir/mapped_fastq/${STEM}_megares_map.fastq mappedonly
+            
+    # use bwa to index and align (aln) contigs with short reads containing ARGs
+    $bwa index $megahit_outdir/${STEM}_assembled/final.contigs.fa
+    $bwa mem -t 15 $megahit_outdir/${STEM}_assembled/final.contigs.fa $aln_outdir/mapped_fastq/${STEM}_megares_map.fastq > $aln_outdir/${STEM}_contig_ARGread_aln.sam
+
+    # get the contigs header containing ARG 
+    $bbmap/reformat.sh in=$aln_outdir/${STEM}_contig_ARGread_aln.sam out=$aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.sam mappedonly 
+    
+    # gather A0-based run header from the sam file & add a space after each line for the 1st field of the actual contig header (annoying reformating due to spaces in the contig header, e.g: ">k141_49608 flag=0 multi=1.0000 len=233")
+    grep 'A0' $aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.sam | cut -f 3 > $aln_outdir/${STEM}_header.txt
+    python3 $pyhd --i $aln_outdir/${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
+
+    # filter use the above list to retain ARG read aligned contigs
+    # http://seqanswers.com/forums/archive/index.php/t-75650.html
+    $bbmap/filterbyname.sh in=$megahit_outdir/${STEM}_assembled/final.contigs.fa out=$aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.fa names=$aln_outdir/${STEM}_header.txt include=t 
+  fi      
+done    
+
+echo "STEP 9 DONE AT: "; date
+
 ########################################################################################################################
 ##
 ## STEP 10. ID the taxonomy of contigs using taxator-tk 
-#
-#echo "NOW STARTING TAXONOMY ID AT: "; date
-#
-## File paths
-#mkdir $run_dir/step10_CAT
-#CAT_outdir=$run_dir/step10_CAT
-#cd $CAT_outdir 
-#
-## Software paths
-#CAT=/share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack/CAT
-#progdigal=/software/prodigal/2.6.3/x86_64-linux-ubuntu14.04/bin/prodigal 
-#diamond=/share/lemaylab-backedup/milklab/programs/diamond
-#
-#
-#for file in $aln_outdir/*_contig_aln.fasta
-#do
-#        STEM=$(basename "$file" _contig_aln.fasta)
-#
-#        echo "Processing sample $STEM now...... "
-#        # for help /share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack/CAT contigs -h
-#        # https://github.com/dutilh/CAT
-#
-#        $CAT contigs -c $file -d /share/lemaylab-backedup/milklab/database/CAT_prepare_20190719/2019-07-19_CAT_database -t /share/lemaylab-backedup/milklab/database/CAT_prepare_20190719/2019-07-19_taxonomy --path_to_prodigal $progdigal --path_to_diamond $diamond -o $CAT_outdir/${STEM}_CAT -n 25
-#
-#        $CAT add_names -i $CAT_outdir/${STEM}_CAT.contig2classification.txt -o $CAT_outdir/${STEM}.taxaid.txt -t /share/lemaylab-backedup/milklab/database/CAT_prepare_20190719/2019-07-19_taxonomy --only_official
-#
-#        $CAT summarise -c $file -i $CAT_outdir/${STEM}.taxaid.txt -o $CAT_outdir/${STEM}.taxaname.txt
-#done    
-#
-#echo "STEP 10 DONE AT: "; date
+
+echo "NOW STARTING TAXONOMY ID FOR ARG-containing contigs AT: "; date
+
+# File paths
+mkdir $run_dir/step10_CAT
+CAT_outdir=$run_dir/step10_CAT
+cd $CAT_outdir 
+
+# Software paths
+CAT=/share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack/CAT # CAT version and database to be updated soon!
+CATdb=/share/lemaylab-backedup/milklab/database/CAT_prepare_20190719
+progdigal=/software/prodigal/2.6.3/x86_64-linux-ubuntu14.04/bin/prodigal 
+diamond=/share/lemaylab-backedup/milklab/programs/diamond
+
+
+for file in $aln_outdir/*_contig_ARGread_aln_mappedonly.fa
+do
+        STEM=$(basename "$file" _contig_ARGread_aln_mappedonly.fa)
+
+        echo "Processing sample $STEM now...... "
+        # for help /share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack/CAT contigs -h
+        # https://github.com/dutilh/CAT
+
+        $CAT contigs -c $file -d $CATdb/2019-07-19_CAT_database -t $CATdb/2019-07-19_taxonomy --path_to_prodigal $progdigal --path_to_diamond $diamond -o $CAT_outdir/${STEM}_CAT -n 25
+
+        $CAT add_names -i $CAT_outdir/${STEM}_CAT.contig2classification.txt -o $CAT_outdir/${STEM}.taxaid.txt -t $CATdb/2019-07-19_taxonomy --only_official
+
+        $CAT summarise -c $file -i $CAT_outdir/${STEM}.taxaid.txt -o $CAT_outdir/${STEM}.taxaname.txt
+done    
+
+echo "STEP 10 DONE AT: "; date
