@@ -22,4 +22,11 @@ tar -xvf /share/lemaylab-backedup/databases/kegg/genes/ko.tar.gz
 ### get gene name without annotation: eco:b0004
 grep ">" prokaryotes.pep.fasta | cut -d ">" -f 2 | cut -d " " -f 1 > kegg_gene_ids.txt
 
-# Alternative method to extract all gene ids
+# calculate the length of each gene
+awk '/^>/{if (l!="") print l; print; l=0; next}{l+=length($0)}END{print l}' /database/kegg/genes/fasta/prokaryotes.pep.fasta | paste - - | sed 's/>//g' >> /database/kegg/genes/fasta/prokaryotes.pep_gene_length.txt
+
+# format the output length table to tab-separated file
+# https://stackoverflow.com/questions/22727107/how-to-find-the-last-field-using-cut
+paste --delimiter='\t'  <(cut prokaryotes.pep_gene_length.txt -d " " -f 1) <(cat prokaryotes.pep_gene_length.txt | rev | cut -f 1 | rev) > prokaryotes.pep_gene_length_2cols.txt
+
+
