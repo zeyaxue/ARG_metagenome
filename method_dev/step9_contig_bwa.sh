@@ -7,11 +7,13 @@
 
 echo "NOW STARTING SHORT READ AND CONTIG ALIGNMENT AT: "; date
 
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq112
+
 # Set input and output file paths
-megares_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step6_megares_bwa
-megahit_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step8_megahit_nomerg
-mkdir /share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa_nomerg
-aln_outdir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043/step9_contig_bwa_nomerg
+megares_outdir=$run_dir/step6_megares_bwa
+megahit_outdir=$run_dir/step8_megahit_in_trimmomatic
+mkdir $run_dir/step9_contig_bwa_nomerg
+aln_outdir=$run_dir/step9_contig_bwa_nomerg
 mkdir $aln_outdir/mapped_fastq
 
 # Make sure bash knows where to look for softwares 
