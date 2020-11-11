@@ -43,13 +43,13 @@ args = parser.parse_args()
 in_file = args.input 	# set second flag argument to a variable
 out_file = args.output 	# set third flag argument to a variable
 
-print("Input file: %s, Output file: %s") % (args.input, args.output)
+print(("Input file: %s, Output file: %s") % (in_file, out_file))
 
 genes = [] 									# create a blank list 
 for file in in_file:
-	with open(file, 'rU') as f:
+	with open(file, 'r') as f:
 		for line in f:
-			x = re.split('[: \t]', line)		# split each row by special characters
+			x = re.split('[\t]', line)		# split each row by special characters
 			genes.append(x[1])					# append id names to blank list
 counts = Counter(genes)
 
