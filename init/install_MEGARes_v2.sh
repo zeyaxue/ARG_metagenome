@@ -23,7 +23,7 @@ for file in *.fasta
 do
 	STEM=$(basename "$file" .fasta)
 
-	source /share/lemaylab-backedup/Zeya/scripts/gitSRC/ARG_metagenome/count_fasta_length.sh \
+	source /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/count_fasta_length.sh \
 	$file \
 	${STEM}_GeneLen.txt 
 done	
