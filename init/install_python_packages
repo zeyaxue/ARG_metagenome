@@ -1,17 +1,20 @@
 # on spitfire 
+module load pip 
+## The output will give you "Exception in thread Thread-1:.." But that's ok
+
 
 # install numpy package to specific location from source
-pip install numpy -t /share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts
+pip install numpy==1.16.5 -t /share/lemaylab-backedup/milklab/programs/MicrobeCensus-1.1.1/scripts
 pip install numpy==1.14.0 -t /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/ 
 
 
 # install Biopython package
-pip install biopython --user # location is at /afs/genomecenter.ucdavis.edu/home/xzyao/.local/lib/python2.7/site-packages 
+pip install biopython==1.74 --user # location is at /afs/genomecenter.ucdavis.edu/home/xzyao/.local/lib/python2.7/site-packages 
 
 # install cogent.parse.fastq from cogent package
-pip install cogent --user
+pip install cogent==1.9 --user
 
 ### install pandas for inside the "/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome"
 cd /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome 
-pip install pandas -t ./
+pip install pandas==0.24.2 -t ./
 
