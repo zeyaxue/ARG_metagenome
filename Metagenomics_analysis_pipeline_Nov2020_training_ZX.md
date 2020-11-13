@@ -147,3 +147,11 @@ This step performs (1) alignment to CAZy database, (2) count the alignment, (3) 
 - Output directory: `$run_dir/b_galac_diamond`
 
 This step performs (1) alignment to b-gal database, (2) count the alignment, (3) normalize count tables with MicrobeCensus. 
+
+- Get the taxa associated with b-gal: See `/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/non_pipeline/get_b-gal_associated_taxa.sh`
+- This script includes: 
+    - (1) Subset shotgun sequencing reads assigned to b-gal by DIAMOND
+    - (2) Kraken2 on the subsetted reads (not all reads have taxonomy identifications)
+    - (3) Estimate species proportions with Bracken
+
+This method identifies the general taxa that have b-gal genes, but does not definitively report the taxonomy origin of b-gal genes. To get the latter information, step 9 & 10 in the pipeline script can be modified.
