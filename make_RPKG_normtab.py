@@ -63,7 +63,7 @@ def make_RPKG_normtab(mcfp=None, lenfp=None, countfp=None, outfp=None):
 		samid = re.search('(.+?)_gene.tsv', fn).group(1)
 
 		if countab.empty:
-			print("There is no AMR genes in sample " + samid + ".") 
+			print("There are no AMR genes in sample " + samid + ".") 
 			exit()
 		else:	
 			# Remove all the NaN genenrated in the middle of the df due to parsing "RequiresSNPConfirmation"
