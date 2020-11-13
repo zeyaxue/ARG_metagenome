@@ -313,16 +313,15 @@ norm_outdir=$run_dir/step7_norm_count_tab/normalized_tab
 
 # Software paths
 norm=/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/make_RPKG_normtab.py
-
-# make sure python knows where to look for pkgs
-export PATH="/home/xzyao/.local/bin:$PATH"
+# Make sure Numpy and pandas are downloaded in the same directory as $norm
+## See /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/init/install_python_packages
 
 for file in $ra_outdir/*_gene.tsv
 do
   STEM=$(basename "$file" _gene.tsv)
 
   python $norm \
-  --mc $mc_outdir/${STEM}_allreads_mc.txt \
+  --mc $mc_outdir/${STEM}_mc.txt \
   --genelen /share/lemaylab-backedup/milklab/database/megares_v2/megares_modified_database_v2_GeneLen_org.tsv \
   --count $file \
   --out $norm_outdir/${STEM}_norm.csv \
@@ -420,7 +419,7 @@ echo "STEP 9 DONE AT: "; date
 
 ########################################################################################################################
 ##
-## STEP 10. ID the taxonomy of contigs using taxator-tk 
+## STEP 10. ID the taxonomy of contigs using CAT 
 
 echo "NOW STARTING TAXONOMY ID FOR ARG-containing contigs AT: "; date
 
