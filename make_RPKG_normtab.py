@@ -57,19 +57,24 @@ def make_RPKG_normtab(mcfp=None, lenfp=None, countfp=None, outfp=None):
 							  header=None).set_index('MEGID')
 		countab = countab.drop('Gene', axis=0) # Remove the first row which contains pre-parsing header
 		
-		# Remove all the NaN genenrated in the middle of the df due to parsing "RequiresSNPConfirmation"
-		for i in countab.index:
-			if numpy.isnan(countab.at[i,'Hits']):
-				countab.at[i,'Hits'] = countab.at[i,'DUM']
-				countab.at[i,'GeneFrac'] = countab.at[i,'MY']
-		countab = countab.drop(columns=['DUM','MY'])
-	
 		# assumes sample name is the character string after the last / and before .tsv
 		# The sample name is 5007 from the path /file/to/your/path/5007_gene.tsv
 		fn = os.path.basename(countfp) # get the xx_gene.tsv file name
 		samid = re.search('(.+?)_gene.tsv', fn).group(1)
-		# remove the "align" suffix after sample name
-		countab_fin = countab.replace(countab.at[i, 'Sample'], samid) # I hitched the last i value from the previous loop
+
+		if countab.empty:
+			print("There is no AMR genes in sample " + samid + ".") 
+			exit()
+		else:	
+			# Remove all the NaN genenrated in the middle of the df due to parsing "RequiresSNPConfirmation"
+			for i in countab.index:
+				if numpy.isnan(countab.at[i,'Hits']):
+					countab.at[i,'Hits'] = countab.at[i,'DUM']
+					countab.at[i,'GeneFrac'] = countab.at[i,'MY']
+			countab = countab.drop(columns=['DUM','MY'])
+		
+			# remove the "align" suffix after sample name
+			countab_fin = countab.replace(countab.at[i, 'Sample'], samid) # I hitched the last i value from the previous loop
 	except ValueError:
 		pass	
 
