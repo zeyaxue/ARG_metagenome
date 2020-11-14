@@ -407,7 +407,7 @@ do
     
     # gather A0-based run header from the sam file & add a space after each line for the 1st field of the actual contig header (annoying reformating due to spaces in the contig header, e.g: ">k141_49608 flag=0 multi=1.0000 len=233")
     grep 'A0' $aln_outdir/${STEM}_contig_ARGread_aln_mappedonly.sam | cut -f 3 > $aln_outdir/${STEM}_header.txt
-    python3 $pyhd --i $aln_outdir/${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
+    python $pyhd --i $aln_outdir/${STEM}_header.txt --f $megahit_outdir/${STEM}_assembled/final.contigs.fa --o $aln_outdir/${STEM}_header.txt
 
     # filter use the above list to retain ARG read aligned contigs
     # http://seqanswers.com/forums/archive/index.php/t-75650.html
