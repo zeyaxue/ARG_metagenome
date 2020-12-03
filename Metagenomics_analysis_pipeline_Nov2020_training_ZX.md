@@ -108,7 +108,7 @@ Make sure to use only paired-end reads for assembly. Merged reads may have low q
 - Output directory for contig fasta files: `$run_dir/step9_contig_bwa_nomerg`
 
 
-## STEP 10. ID the taxonomy of contigs using taxator-tk 
+## STEP 10. ID the taxonomy of contigs using CAT 
 - Initialization: download CAT v5.0.3 `/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/init/install_CAT.sh`
 - Script: step 10 in `/share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/ARG_pipeline_v0.3.sh`
 - Input files: `$run_dir/step9_contig_bwa_nomerg/*.fa`
