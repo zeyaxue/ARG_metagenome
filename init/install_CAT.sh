@@ -43,6 +43,7 @@ diff CAT_prepare_20190719/checksum_check.txt CAT_prepare_20190719/CAT_prepare_20
 #---
 #> 7c3d6a405286ac572920c37c9da70749  CAT_prepare_20190719.tar.gz
 
+
 # Check the version of DIAMOND 
 cd /share/lemaylab-backedup/milklab/database/
 grep version CAT_prepare_20190719/2019-07-19.CAT_prepare.fresh.log 
@@ -76,3 +77,39 @@ rsync -av CAT-5.0.3/ CAT-5.0.3_original/
 cd /share/lemaylab-backedup/milklab/programs/CAT-5.0.3/CAT_pack
 # change shebang line in contigs.py & add_names.py & summarise.py
 # #!/software/python/3.6.2/x86_64-linux-ubuntu14.04/bin/python3.6
+
+
+################################11/12/2020################################
+# Download the latest version of database
+cd /share/lemaylab-backedup/databases
+wget https://tbb.bio.uu.nl/bastiaan/CAT_prepare/CAT_prepare_20200618.tar.gz
+tar -xvzf CAT_prepare_20200618.tar.gz
+
+# Download the md5 file of the database
+cd 	CAT_prepare_20200618
+wget https://tbb.bio.uu.nl/bastiaan/CAT_prepare/CAT_prepare_20200618.tar.gz.md5
+# perform checksum myself
+md5sum ../CAT_prepare_20200618.tar.gz > checksum_check.txt  
+# compare the check sum --> same file 
+diff checksum_check.txt CAT_prepare_20200618.tar.gz.md5 
+##1c1
+##< 3e311abd6a28663754ebe76d75f6346e  ../CAT_prepare_20200618.tar.gz
+##---
+##> 3e311abd6a28663754ebe76d75f6346e  CAT_prepare_20200618.tar.gz
+
+# Check the version of DIAMOND 
+cd /share/lemaylab-backedup/databases
+grep version CAT_prepare_20190719/2019-07-19.CAT_prepare.fresh.log 
+#output
+#[2020-06-18 14:53:07.163156] DIAMOND found: diamond version 0.9.34.
+/share/lemaylab-backedup/milklab/programs/diamond help
+#output 
+#diamond v0.9.21.122 | by Benjamin Buchfink <buchfink@gmail.com>
+
+### Need to download the compatible diamond version
+#download the same version of diamond
+cd /share/lemaylab-backedup/milklab/programs
+wget https://github.com/bbuchfink/diamond/releases/download/v0.9.34/diamond-linux64.tar.gz
+mkdir diamond-0.9.34
+tar -C diamond-0.9.34 -xvzf diamond-linux64.tar.gz 
+## now version is v0.9.34.135
