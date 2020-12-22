@@ -2,7 +2,7 @@
 
 ## before start the script, start the conda env by 'conda activate metagenome_zx'
 
-run_dir=/home/AMR_metagenome/processed_data/Novaseq_072rerun
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 
 # DIAMOND
 diamond_location=/share/lemaylab-backedup/milklab/programs/diamond
