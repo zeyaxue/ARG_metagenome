@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
-'''This script requies 4 input files 2 and output file paths:
+'''This script requies 5 input files 3 and output file paths:
 	Input:
 	(1) (Optional) MicrobeCensus output txt file. 
 	(2) (Optional) Organized table of KEGG database amino acid sequence length. (3*aa+3)
 	(3) (Optional) Orgnized KEGG count table per sample with one column in gene names and the other in counts.
-	(4) (Optional) A wildcard input indicating normalized tables to be merged. 
+	(4) (Optional) A wildcard input indicating normalized tables to be merged.
+	(5) (Optional) A file containing gene id and KO ids.
 	Output:
 	(1) (Required for python 2.x) Individual normalized table.
 	(2) (Optional) Merged normalized table containg multiple samples from Input(4). Can be omitted to not have a merged table.
+	(3) (Optional) Merged normalized table with gene-associated KO ids.
 	'''
 
 import pandas as pd
@@ -28,6 +30,9 @@ parser.add_argument('--out', type=str, help='File path to write the normalized c
 # althoug not required for argparse, the wildcard input is required by the merge_normtab() function
 parser.add_argument('--mergein', type=str, help='File path to a number of normalized count tables per sample.', nargs='+', required=False) 
 parser.add_argument('--mergeout', type=str, help='File path to write the normalized count table.', required=False)
+parser.add_argument('--koin', type=str, help='File path to the normalized count table.', required=False)
+parser.add_argument('--koids', type=str, help='File path to table containing gene ids and KO ids.', required=False)
+parser.add_argument('--koout', type=str, help='File path to write the normalized count table with added KO ids.', required=False)
 args = vars(parser.parse_args())
 
 
@@ -103,6 +108,20 @@ def merge_normtab(mergeout=None, *args):
 	except: 
 		pass	# in python 2, this won't work...*args still requires input
 
+
+# Define function to add KO ids to each gene 
+def add_ko(koin=None, koids=None, koout=None):
+	try:
+		koin =  pd.read_csv(koin, sep=',', header=0, index_col=0)
+		koids = pd.read_csv(koids, sep='\t', index_col=False, names=["Gene", "KO_ID", "Gene_length", "Description"])
+
+		# merge based on shared gene ids, which is the indexes of dataframe
+		tab = pd.merge(koin, koids.drop(columns=['Gene_length']), how='left', on = ['Gene'])
+		tab.to_csv(koout, sep=',')
+	except:
+		pass 	
+
+
 # To ensure that the script can be run by itself (__name__ == "__main__" is true) 
 # and individual functions can be imported as modules in other python scripts
 if __name__ == "__main__":
@@ -112,7 +131,9 @@ if __name__ == "__main__":
 					  lenfp=args['genelen'], 
 					  countfp=args['count'], 
 					  outfp=args['out']) 
+	add_ko(koin=args['koin'], koids=args['koids'], koout=args['koout'])
 	merge_normtab(args['mergeout'], *args['mergein']) # add * to parse the wildcard input to multiple string variables
+
 
 
 	
