@@ -6,7 +6,7 @@
 
 echo "NOW STARTING TAXONOMY ID AT: "; date
 
-run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/Novaseq_072rerun
 
 # set input and output file paths
 aln_outdir=$run_dir/step9_contig_bwa_nomerg
