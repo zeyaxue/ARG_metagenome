@@ -2,11 +2,12 @@
 
 ## before start the script, start the conda env by 'conda activate metagenome_zx'
 
-run_dir=/home/AMR_metagenome/processed_data/Novaseq_072rerun
+run_dir=/share/lemaylab-backedup/Zeya/proceesed_data/NovaSeq043
 
 # DIAMOND
-diamond_location=/software/diamond-0.9.21/diamond
-db=/database/kegg/genes/fasta/prokaryotes.pep.dmnd
+diamond_location=/share/lemaylab-backedup/milklab/programs/diamond
+db=/share/lemaylab-backedup/databases/kegg/genes/fasta/prokaryotes.pep.dmnd
+koid=/share/lemaylab-backedup/databases/kegg/genes/fasta/prokaryotes.dat
 
 ####################################################################
 #
@@ -53,12 +54,17 @@ do
 		python /home/AMR_metagenome/scripts/kegg_db_analysis_counter.py --in $output_dir_kegg/${STEM}.txt --out $output_dir_kegg/${STEM}.csv
 
 		# normalized count table
-		python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mc $run_dir/step5_MicrobeCensus_merged/${STEM}_mc.txt --genelen /database/kegg/genes/fasta/prokaryotes.pep_gene_length_2cols.txt --count $output_dir_kegg/${STEM}.csv --out $output_dir_kegg/${STEM}_norm.csv --mergein $file # This argument does not do anything here, but python2 requires *args to be not empty so I supply a dummy argument (if using python3, can omit this input)
+		python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mc $run_dir/step5_MicrobeCensus_merged/${STEM}_mc.txt --genelen /database/kegg/genes/fasta/prokaryotes.pep_gene_length_2cols.txt --count $output_dir_kegg/${STEM}.csv --out $output_dir_kegg/${STEM}_norm.csv --mergein $file # This argument does not do anything here, but python requires *args to be not empty so I supply a dummy argument
 
 	fi
 done	
 
+# merge the normalized tables from all samples 
+#python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mergeout $output_dir_kegg/merged_norm_tab.csv --mergein $output_dir_kegg/*_norm.csv
+
 # add corresponding KEGG ids to each gene
+python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --koin $output_dir_kegg/merged_norm_tab.csv --koids $koid --koout $output_dir_kegg/merged_norm_tab_withKO.csv --mergein $file
+
 
 
 
