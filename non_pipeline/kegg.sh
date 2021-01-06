@@ -51,10 +51,10 @@ do
 		echo "counting sample ${STEM}"
 
 		# organize the DIAMOND alignment file to count table 
-		python /home/AMR_metagenome/scripts/kegg_db_analysis_counter.py --in $output_dir_kegg/${STEM}.txt --out $output_dir_kegg/${STEM}.csv
+		python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/kegg_db_analysis_counter.py --in $output_dir_kegg/${STEM}.txt --out $output_dir_kegg/${STEM}.csv
 
 		# normalized count table
-		python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mc $run_dir/step5_MicrobeCensus_merged/${STEM}_mc.txt --genelen /database/kegg/genes/fasta/prokaryotes.pep_gene_length_2cols.txt --count $output_dir_kegg/${STEM}.csv --out $output_dir_kegg/${STEM}_norm.csv --mergein $file # This argument does not do anything here, but python requires *args to be not empty so I supply a dummy argument
+		python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/make_KEGG_normtab.py --mc $run_dir/step5_MicrobeCensus_merged/${STEM}_mc.txt --genelen /database/kegg/genes/fasta/prokaryotes.pep_gene_length_2cols.txt --count $output_dir_kegg/${STEM}.csv --out $output_dir_kegg/${STEM}_norm.csv --mergein $file # This argument does not do anything here, but python requires *args to be not empty so I supply a dummy argument
 
 	fi
 done	
@@ -63,7 +63,7 @@ done
 #python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mergeout $output_dir_kegg/merged_norm_tab.csv --mergein $output_dir_kegg/*_norm.csv
 
 # add corresponding KEGG ids to each gene
-python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --koin $output_dir_kegg/merged_norm_tab.csv --koids $koid --koout $output_dir_kegg/merged_norm_tab_withKO.csv --mergein $file
+python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/make_KEGG_normtab.py --koin $output_dir_kegg/merged_norm_tab.csv --koids $koid --koout $output_dir_kegg/merged_norm_tab_withKO.csv --mergein $file
 
 
 
