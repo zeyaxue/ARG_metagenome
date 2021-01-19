@@ -60,7 +60,7 @@ do
 done	
 
 # merge the normalized tables from all samples 
-#python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mergeout $output_dir_kegg/merged_norm_tab.csv --mergein $output_dir_kegg/*_norm.csv
+python /home/AMR_metagenome/scripts/make_KEGG_normtab.py --mergeout $output_dir_kegg/merged_norm_tab.csv --mergein $output_dir_kegg/*_norm.csv
 
 # add corresponding KEGG ids to each gene
 python /share/lemaylab-backedup/Zeya/scripts/ARG_metagenome/make_KEGG_normtab.py --koin $output_dir_kegg/merged_norm_tab.csv --koids $koid --koout $output_dir_kegg/merged_norm_tab_withKO.csv --mergein $file
